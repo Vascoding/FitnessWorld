@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using FitnessWorld.Data;
 using FitnessWorld.Data.Models;
 using FitnessWorld.Web.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessWorld.Web
 {
@@ -38,7 +39,10 @@ namespace FitnessWorld.Web
 
             // Add application services.
             services.AddDomainServices();
-            services.AddMvc();
+            services.AddMvc(option =>  
+            {
+                option.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +67,10 @@ namespace FitnessWorld.Web
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "areas",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

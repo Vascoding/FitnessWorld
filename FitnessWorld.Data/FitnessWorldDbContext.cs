@@ -25,6 +25,8 @@ namespace FitnessWorld.Data
 
         public DbSet<Nutrition> Nutritions { get; set; }
 
+        public DbSet<UserResponder> UserResponder { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<UserFood>()
@@ -69,6 +71,22 @@ namespace FitnessWorld.Data
                 .HasMany(a => a.Comments)
                 .WithOne(c => c.Answer)
                 .HasForeignKey(c => c.AnswerId);
+
+            builder.Entity<UserResponder>()
+                .HasKey(ur => new { ur.MainUserId, ur.ResponderId });
+
+            builder.Entity<UserResponder>()
+                .HasOne(ur => ur.MainUser)
+                .WithMany(m => m.Responders)
+                .HasForeignKey(ur => ur.MainUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<UserResponder>()
+                .HasOne(ur => ur.Responder)
+                .WithMany(r => r.MainUsers)
+                .HasForeignKey(ur => ur.ResponderId)
+                .OnDelete(DeleteBehavior.Restrict);
+                
 
             base.OnModelCreating(builder);
         }

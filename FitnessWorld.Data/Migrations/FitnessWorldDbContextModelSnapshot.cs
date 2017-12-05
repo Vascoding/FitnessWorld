@@ -12,10 +12,9 @@ using System;
 namespace FitnessWorld.Data.Migrations
 {
     [DbContext(typeof(FitnessWorldDbContext))]
-    [Migration("20171205132915_InitializeComponents")]
-    partial class InitializeComponents
+    partial class FitnessWorldDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -226,6 +225,19 @@ namespace FitnessWorld.Data.Migrations
                     b.ToTable("UserFood");
                 });
 
+            modelBuilder.Entity("FitnessWorld.Data.Models.UserResponder", b =>
+                {
+                    b.Property<string>("MainUserId");
+
+                    b.Property<string>("ResponderId");
+
+                    b.HasKey("MainUserId", "ResponderId");
+
+                    b.HasIndex("ResponderId");
+
+                    b.ToTable("UserResponder");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -381,6 +393,19 @@ namespace FitnessWorld.Data.Migrations
                         .WithMany("Food")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("FitnessWorld.Data.Models.UserResponder", b =>
+                {
+                    b.HasOne("FitnessWorld.Data.Models.User", "MainUser")
+                        .WithMany("Responders")
+                        .HasForeignKey("MainUserId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("FitnessWorld.Data.Models.User", "Responder")
+                        .WithMany("MainUsers")
+                        .HasForeignKey("ResponderId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

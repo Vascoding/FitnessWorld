@@ -13,6 +13,10 @@ namespace FitnessWorld.Data.Models
 
         public List<UserFood> Food { get; set; } = new List<UserFood>();
 
+        public List<UserResponder> MainUsers { get; set; }
+
+        public List<UserResponder> Responders { get; set; }
+
         public int Points { get; set; }
     }
 }

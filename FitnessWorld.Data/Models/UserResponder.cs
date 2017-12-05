@@ -2,9 +2,9 @@
 {
     public class UserResponder
     {
-        public string UserId { get; set; }
+        public string MainUserId { get; set; }
 
-        public User User { get; set; }
+        public User MainUser { get; set; }
 
         public string ResponderId { get; set; }
 
