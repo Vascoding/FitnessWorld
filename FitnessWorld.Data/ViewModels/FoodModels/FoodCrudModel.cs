@@ -1,12 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FitnessWorld.Web.Models.FoodViewModels
+
+namespace FitnessWorld.Data.ViewModels.FoodModels
 {
-    public class AddFoodViewModel
+    public class FoodCrudModel
     {
+        public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
-        
+
         [Range(0, int.MaxValue)]
         public int Calories { get; set; }
 

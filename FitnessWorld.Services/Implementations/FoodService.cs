@@ -1,10 +1,12 @@
 ﻿using AutoMapper.QueryableExtensions;
 using FitnessWorld.Data;
 using FitnessWorld.Data.Models;
+using FitnessWorld.Data.ViewModels.FoodModels;
 using FitnessWorld.Services.Contracts;
 using FitnessWorld.Services.Models.FoodModels;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FitnessWorld.Services.Implementations
@@ -39,6 +41,43 @@ namespace FitnessWorld.Services.Implementations
             this.db.Food.Add(food);
 
             await this.db.SaveChangesAsync();
+        }
+
+        public async Task<FoodCrudModel> FindByIdAsync(int id)
+            => await this.db
+            .Food
+            .Where(f => f.Id == id)
+            .ProjectTo<FoodCrudModel>()
+            .FirstOrDefaultAsync();
+
+        public async Task EditAsync(int id, string name, int calories, int fat, int protein, int carbs, int fiber, int sugar)
+        {
+            var food = await this.db.Food.FirstOrDefaultAsync(f => f.Id == id);
+
+            if (food != null)
+            {
+                food.Name = name;
+                food.Calories = calories;
+                food.Fat = fat;
+                food.Protein = protein;
+                food.Carbs = carbs;
+                food.Fiber = fiber;
+                food.Sugar = sugar;
+
+                await this.db.SaveChangesAsync();
+            }
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var food = await this.db.Food.FirstOrDefaultAsync(f => f.Id == id);
+
+            if (food != null)
+            {
+                this.db.Food.Remove(food);
+
+                await this.db.SaveChangesAsync();
+            }
         }
     }
 }

@@ -1,53 +1,55 @@
-﻿@model FoodViewModel
+﻿@model FoodCrudModel
 @{
-    ViewData["Title"] = "Add Food";
+    ViewData["Title"] = "Food To Edit";
 }
 
 <h2>@ViewData["Title"]</h2>
-
 
 <div class="row">
     <div class="col-md-4">
         <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
+            <input hidden value="@Model.Id" />
             <div class="form-group">
                 <label asp-for="Name"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control" value="@Model.Name"/>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Calories"></label>
-                <input asp-for="Calories" class="form-control" />
+                <input asp-for="Calories" class="form-control" value="@Model.Calories" />
                 <span asp-validation-for="Calories" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Fat"></label>
-                <input asp-for="Fat" class="form-control" />
+                <input asp-for="Fat" class="form-control" value="@Model.Fat" />
                 <span asp-validation-for="Fat" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Protein"></label>
-                <input asp-for="Protein" class="form-control" />
+                <input asp-for="Protein" class="form-control" value="@Model.Protein" />
                 <span asp-validation-for="Protein" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Carbs"></label>
-                <input asp-for="Carbs" class="form-control" />
+                <input asp-for="Carbs" class="form-control" value="@Model.Carbs" />
                 <span asp-validation-for="Carbs" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Fiber"></label>
-                <input asp-for="Fiber" class="form-control" />
+                <input asp-for="Fiber" class="form-control" value="@Model.Fiber" />
                 <span asp-validation-for="Fiber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Sugar"></label>
-                <input asp-for="Sugar" class="form-control" />
+                <input asp-for="Sugar" class="form-control" value="@Model.Sugar" />
                 <span asp-validation-for="Sugar" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-default">Add</button>
+            <button type="submit" class="btn btn-warning">Edit</button>
+            <a class="btn btn-default" asp-area="Admin" asp-controller="Food" asp-action="Index">Cancel</a>
         </form>
+        
     </div>
 </div>
 

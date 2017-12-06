@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<FoodServiceModel>
 @{
-    ViewData["Title"] = "Food Index";
+    ViewData["Title"] = "All Food";
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -19,6 +19,7 @@
         <th>Carbs</th>
         <th>Fiber</th>
         <th>Sugar</th>
+        <th></th>
     </tr>
     @foreach (var food in Model)
     {
@@ -31,6 +32,10 @@
             <td>@food.Carbs</td>
             <td>@food.Fiber</td>
             <td>@food.Sugar</td>
+            <td>
+                <a class="btn btn-warning" asp-area="Admin" asp-controller="Food" asp-action="Edit" asp-route-id="@food.Id">Edit</a>
+                <a class="btn btn-danger" asp-area="Admin" asp-controller="Food" asp-action="Delete" asp-route-id="@food.Id">Delete</a>
+            </td>
         </tr>
     }
 </table>
