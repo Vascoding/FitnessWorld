@@ -31,7 +31,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                    @if (User.IsInRole(RoleConstants.Admin))
+                    {
+                        <li><a asp-area="Admin" asp-controller="Admins" asp-action="Index">Admin</a></li>
+                    }
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
@@ -42,7 +45,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2017 - FitnessWorld.Web</p>
+            <p>&copy; 2017 - FitnessWorld.com</p>
         </footer>
     </div>
 

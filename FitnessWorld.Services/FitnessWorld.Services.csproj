@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\FoodModels\AddFoodServiceModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FitnessWorld.Common\FitnessWorld.Common.csproj" />
     <ProjectReference Include="..\FitnessWorld.Data\FitnessWorld.Data.csproj" />
   </ItemGroup>

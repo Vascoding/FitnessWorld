@@ -96,9 +96,10 @@ namespace FitnessWorld.Data.Migrations
 
                     b.Property<int>("Fiber");
 
-                    b.Property<int>("Protein");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
-                    b.Property<int>("Quantity");
+                    b.Property<int>("Protein");
 
                     b.Property<int>("ServingSize");
 

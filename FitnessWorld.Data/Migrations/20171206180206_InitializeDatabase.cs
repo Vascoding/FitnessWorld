@@ -72,8 +72,8 @@ namespace FitnessWorld.Data.Migrations
                     Carbs = table.Column<int>(nullable: false),
                     Fat = table.Column<int>(nullable: false),
                     Fiber = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Protein = table.Column<int>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false),
                     ServingSize = table.Column<int>(nullable: false),
                     Sugar = table.Column<int>(nullable: false)
                 },

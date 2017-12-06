@@ -14,5 +14,7 @@
         public const int QuestionTitleMinLength = 10;
         public const int QuestionTitleMaxLength = 100;
         public const int QuestionContentMaxLength = 6000;
+
+        public const int NutritionQuantityMaxValue = 500;
     }
 }

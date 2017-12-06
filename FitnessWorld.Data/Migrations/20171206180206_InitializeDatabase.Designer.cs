@@ -12,7 +12,7 @@ using System;
 namespace FitnessWorld.Data.Migrations
 {
     [DbContext(typeof(FitnessWorldDbContext))]
-    [Migration("20171205183944_InitializeDatabase")]
+    [Migration("20171206180206_InitializeDatabase")]
     partial class InitializeDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,9 +97,10 @@ namespace FitnessWorld.Data.Migrations
 
                     b.Property<int>("Fiber");
 
-                    b.Property<int>("Protein");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
-                    b.Property<int>("Quantity");
+                    b.Property<int>("Protein");
 
                     b.Property<int>("ServingSize");
 

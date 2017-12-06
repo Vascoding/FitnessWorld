@@ -10,6 +10,7 @@ namespace FitnessWorld.Data.Models
     {
         public int Id { get; set; }
         
+        [Range(0, NutritionQuantityMaxValue)]
         public int Quantity { get; set; }
 
         [Required]

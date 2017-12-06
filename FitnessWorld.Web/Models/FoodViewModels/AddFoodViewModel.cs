@@ -1,17 +1,12 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace FitnessWorld.Data.Models
+namespace FitnessWorld.Web.Models.FoodViewModels
 {
-    public class Food
+    public class AddFoodViewModel
     {
-        public int Id { get; set; }
-
         [Required]
         public string Name { get; set; }
-
-        public int ServingSize { get; set; } = 100;
-
+        
         [Range(0, int.MaxValue)]
         public int Calories { get; set; }
 
@@ -29,7 +24,5 @@ namespace FitnessWorld.Data.Models
 
         [Range(0, int.MaxValue)]
         public int Sugar { get; set; }
-
-        public List<UserFood> Users { get; set; } = new List<UserFood>();
     }
 }

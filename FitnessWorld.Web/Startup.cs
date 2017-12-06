@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
@@ -37,8 +38,17 @@ namespace FitnessWorld.Web
                 .AddEntityFrameworkStores<FitnessWorldDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddAuthentication().AddFacebook(fo =>
+            {
+                fo.AppId = "1781721082128129";
+                fo.AppSecret = "9fec7f3a978b601e0ee5eb9bf5a53b2a";
+            });
+
             // Add application services.
             services.AddDomainServices();
+			
+            services.AddAutoMapper();
+
             services.AddMvc(option =>  
             {
                 option.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();

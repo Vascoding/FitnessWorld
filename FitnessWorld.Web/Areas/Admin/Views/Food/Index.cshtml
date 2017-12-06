@@ -1,0 +1,36 @@
+﻿@model IEnumerable<FoodServiceModel>
+@{
+    ViewData["Title"] = "Food Index";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <a asp-area="Admin" asp-controller="Food" asp-action="Add" class="btn btn-default">Add Food</a>
+</div>
+
+<table class="table">
+    <tr>
+        <th>Food</th>
+        <th>ServingSize</th>
+        <th>Calories</th>
+        <th>Fat</th>
+        <th>Protein</th>
+        <th>Carbs</th>
+        <th>Fiber</th>
+        <th>Sugar</th>
+    </tr>
+    @foreach (var food in Model)
+    {
+        <tr>
+            <td>@food.Name</td>
+            <td>@(food.ServingSize + " gr")</td>
+            <td>@food.Calories</td>
+            <td>@food.Fat</td>
+            <td>@food.Protein</td>
+            <td>@food.Carbs</td>
+            <td>@food.Fiber</td>
+            <td>@food.Sugar</td>
+        </tr>
+    }
+</table>
