@@ -1,13 +1,9 @@
-﻿@model ListFoodViewModel
+﻿@model ListCalculateViewModel
 @{
-    ViewData["Title"] = "All Food";
+    ViewData["Title"] = "Choose Food";
 }
 
 <h2>@ViewData["Title"]</h2>
-
-<div>
-    <a asp-area="Admin" asp-controller="Food" asp-action="Add" class="btn btn-default">Add Food</a>
-</div>
 
 <table class="table">
     <tr>
@@ -33,12 +29,42 @@
             <td>@food.Fiber</td>
             <td>@food.Sugar</td>
             <td>
-                <a class="btn btn-warning" asp-area="Admin" asp-controller="Food" asp-action="Edit" asp-route-id="@food.Id">Edit</a>
-                <a class="btn btn-danger" asp-area="Admin" asp-controller="Food" asp-action="Delete" asp-route-id="@food.Id">Delete</a>
+                <a class="btn btn-warning" asp-area="Calculator" asp-controller="Calculate" asp-action="Add" asp-route-id="@food.Id">Add</a>
             </td>
         </tr>
     }
 </table>
+
+<table class="table">
+    <tr>
+        <th>Food</th>
+        <th>ServingSize</th>
+        <th>Calories</th>
+        <th>Fat</th>
+        <th>Protein</th>
+        <th>Carbs</th>
+        <th>Fiber</th>
+        <th>Sugar</th>
+        <th></th>
+    </tr>
+    @foreach (var food in Model.Calculator)
+    {
+        <tr>
+            <td>@food.Name</td>
+            <td>@(food.ServingSize + " gr")</td>
+            <td>@food.Calories</td>
+            <td>@food.Fat</td>
+            <td>@food.Protein</td>
+            <td>@food.Carbs</td>
+            <td>@food.Fiber</td>
+            <td>@food.Sugar</td>
+            <td>
+                <a class="btn btn-danger" asp-area="Calculator" asp-controller="Calculate" asp-action="Remove" asp-route-id="@food.Id">Remove</a>
+            </td>
+        </tr>
+    }
+</table>
+
 
 @if (Model.TotalFoodCount > Model.Food.Count())
 {

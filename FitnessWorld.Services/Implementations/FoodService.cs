@@ -2,6 +2,7 @@
 using FitnessWorld.Data;
 using FitnessWorld.Data.Models;
 using FitnessWorld.Data.ViewModels.FoodModels;
+using FitnessWorld.Services.Constants;
 using FitnessWorld.Services.Contracts;
 using FitnessWorld.Services.Models.FoodModels;
 using Microsoft.EntityFrameworkCore;
@@ -20,8 +21,10 @@ namespace FitnessWorld.Services.Implementations
             this.db = db;
         }
 
-        public async Task<IEnumerable<FoodServiceModel>> AllAsync()
+        public async Task<IEnumerable<FoodServiceModel>> AllAsync(int page = 1)
         => await this.db.Food
+            .Skip((page - 1) * ServiceConstants.PageSize)
+            .Take(ServiceConstants.PageSize)
             .ProjectTo<FoodServiceModel>()
             .ToListAsync();
 
@@ -79,5 +82,7 @@ namespace FitnessWorld.Services.Implementations
                 await this.db.SaveChangesAsync();
             }
         }
+
+        public async Task<int> TotalAsync() => await this.db.Food.CountAsync();
     }
 }

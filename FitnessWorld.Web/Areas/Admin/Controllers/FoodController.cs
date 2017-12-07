@@ -1,5 +1,6 @@
 ﻿using FitnessWorld.Data.ViewModels.FoodModels;
 using FitnessWorld.Services.Contracts;
+using FitnessWorld.Web.Models.ListingViewModels.FoodModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -14,7 +15,13 @@ namespace FitnessWorld.Web.Areas.Admin.Controllers
             this.food = food;
         }
 
-        public async Task<IActionResult> Index() => this.View(await this.food.AllAsync());
+        public async Task<IActionResult> Index(int page = 1)
+        => this.View(new ListFoodViewModel
+        {
+            Food = await this.food.AllAsync(page),
+            TotalFoodCount = await this.food.TotalAsync(),
+            CurrentPage = page
+        });
 
         public IActionResult Add() => this.View();
 

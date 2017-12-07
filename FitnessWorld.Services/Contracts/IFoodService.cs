@@ -7,7 +7,7 @@ namespace FitnessWorld.Services.Contracts
 {
     public interface IFoodService
     {
-        Task<IEnumerable<FoodServiceModel>> AllAsync();
+        Task<IEnumerable<FoodServiceModel>> AllAsync(int page = 1);
 
         Task Create(string name, int calories, int fat, int proteins, int carbs, int fiber, int sugar);
 
@@ -16,5 +16,7 @@ namespace FitnessWorld.Services.Contracts
         Task EditAsync(int id, string name, int calories, int fat, int proteins, int carbs, int fiber, int sugar);
 
         Task DeleteAsync(int id);
+
+        Task<int> TotalAsync();
     }
 }
