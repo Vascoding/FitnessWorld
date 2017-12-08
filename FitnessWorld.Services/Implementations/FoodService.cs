@@ -28,11 +28,9 @@ namespace FitnessWorld.Services.Implementations
             .ProjectTo<FoodServiceModel>()
             .ToListAsync();
 
-        public async Task<IEnumerable<FoodServiceModel>> ResultAsync(string searchText, int page = 1)
+        public async Task<IEnumerable<FoodServiceModel>> ResultAsync(string searchText)
         => await this.db.Food
-            .Where(f => f.Name.Contains(searchText))
-            .Skip((page - 1) * ServiceConstants.PageSize)
-            .Take(ServiceConstants.PageSize)
+            .Where(f => f.Name.ToLower().Contains(searchText.ToLower()))
             .ProjectTo<FoodServiceModel>()
             .ToListAsync();
 

@@ -5,8 +5,15 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<div>
-    <a asp-area="Admin" asp-controller="Food" asp-action="Add" class="btn btn-default">Add Food</a>
+<div class="row">
+    <form asp-action="Index">
+        <div class="col-md-6">
+            <input name="searchText" placeholder="Search for food..." />
+            <input type="submit" value="Search" class="btn btn-default" />
+            <a class="btn btn-default" asp-area="Admin" asp-controller="Food" asp-action="Index">All Food</a>
+            <a asp-area="Admin" asp-controller="Food" asp-action="Add" class="btn btn-default">Add Food</a>
+        </div>
+    </form>
 </div>
 
 <table class="table">
@@ -40,6 +47,7 @@
     }
 </table>
 
+
 @if (Model.TotalFoodCount > Model.Food.Count())
 {
     <ul class="pagination">
@@ -57,3 +65,9 @@
         </li>
     </ul>
 }
+
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-default" asp-area="Admin" asp-controller="Admins" asp-action="Index">Back</a>
+    </div>
+</div>

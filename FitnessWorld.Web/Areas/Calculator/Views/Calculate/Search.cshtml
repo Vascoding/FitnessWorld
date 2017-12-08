@@ -6,11 +6,10 @@
 <h2>@ViewData["Title"]</h2>
 
 <div class="row">
-    <form asp-action="Index">
+    <form asp-action="Search">
         <div class="col-md-6">
-            <input name="searchText" placeholder="Search for food..." />
+            <input name="searchText" value="some" placeholder="Search for food..." />
             <input type="submit" value="Search" class="btn btn-default" />
-            <a class="btn btn-default" asp-action="Index">All Food</a>
         </div>
     </form>
 </div>

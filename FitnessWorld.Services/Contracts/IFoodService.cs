@@ -9,7 +9,7 @@ namespace FitnessWorld.Services.Contracts
     {
         Task<IEnumerable<FoodServiceModel>> AllAsync(int page = 1);
 
-        Task<IEnumerable<FoodServiceModel>> ResultAsync(string searchText, int page = 1);
+        Task<IEnumerable<FoodServiceModel>> ResultAsync(string searchText);
 
         Task Create(string name, int calories, int fat, int proteins, int carbs, int fiber, int sugar);
 

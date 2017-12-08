@@ -15,13 +15,23 @@ namespace FitnessWorld.Web.Areas.Admin.Controllers
             this.food = food;
         }
 
-        public async Task<IActionResult> Index(int page = 1)
-        => this.View(new ListFoodViewModel
+        public async Task<IActionResult> Index(string searchText, int page = 1)
         {
-            Food = await this.food.AllAsync(page),
-            TotalFoodCount = await this.food.TotalAsync(),
-            CurrentPage = page
-        });
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                return this.View(new ListFoodViewModel
+                {
+                    Food = await this.food.AllAsync(page),
+                    TotalFoodCount = await this.food.TotalAsync(),
+                    CurrentPage = page
+                });
+            }
+            return this.View(new ListFoodViewModel
+            {
+                Food = await this.food.ResultAsync(searchText),
+                CurrentPage = page
+            });
+        }
 
         public IActionResult Add() => this.View();
 

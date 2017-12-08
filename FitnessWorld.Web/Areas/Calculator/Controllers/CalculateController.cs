@@ -15,6 +15,7 @@ namespace FitnessWorld.Web.Areas.Calculator.Controllers
 
         public CalculateController(IFoodService food, UserManager<User> userManager, ICalculatorService calculator)
         {
+            
             this.food = food;
             this.userManager = userManager;
             this.calculator = calculator;
@@ -35,13 +36,11 @@ namespace FitnessWorld.Web.Areas.Calculator.Controllers
 
             return this.View(new ListCalculateViewModel
             {
-                Food = await this.food.ResultAsync(searchText, page),
-                TotalFoodCount = await this.food.TotalAsync(),
+                Food = await this.food.ResultAsync(searchText),
                 Calculator = await this.calculator.FoodToCalculate(userManager.GetUserId(User)),
                 CurrentPage = page
             });
         }
-
 
         public async Task<IActionResult> Add(int id)
         {
