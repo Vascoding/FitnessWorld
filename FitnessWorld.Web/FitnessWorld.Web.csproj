@@ -6,6 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\Models\**" />
+    <Compile Remove="Areas\Calculator\Models\**" />
+    <Content Remove="Areas\Admin\Models\**" />
+    <Content Remove="Areas\Calculator\Models\**" />
+    <EmbeddedResource Remove="Areas\Admin\Models\**" />
+    <EmbeddedResource Remove="Areas\Calculator\Models\**" />
+    <None Remove="Areas\Admin\Models\**" />
+    <None Remove="Areas\Calculator\Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Infrastructure\Extensions\EmailSenderExtensions.cs" />
     <Compile Remove="Models\ListingViewModels\ListingModel.cs" />
   </ItemGroup>
@@ -27,11 +38,6 @@
   <ItemGroup>
     <ProjectReference Include="..\FitnessWorld.Data\FitnessWorld.Data.csproj" />
     <ProjectReference Include="..\FitnessWorld.Services\FitnessWorld.Services.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Calculator\Models\" />
   </ItemGroup>
 
 </Project>

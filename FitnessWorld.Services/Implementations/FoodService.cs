@@ -28,6 +28,14 @@ namespace FitnessWorld.Services.Implementations
             .ProjectTo<FoodServiceModel>()
             .ToListAsync();
 
+        public async Task<IEnumerable<FoodServiceModel>> ResultAsync(string searchText, int page = 1)
+        => await this.db.Food
+            .Where(f => f.Name.Contains(searchText))
+            .Skip((page - 1) * ServiceConstants.PageSize)
+            .Take(ServiceConstants.PageSize)
+            .ProjectTo<FoodServiceModel>()
+            .ToListAsync();
+
         public async Task Create(string name, int calories, int fat, int proteins, int carbs, int fiber, int sugar)
         {
             var food = new Food()

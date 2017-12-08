@@ -11,6 +11,9 @@
         public const int NutritionDescriptionMinLength = 30;
         public const int NutritionDescriptionMaxLength = 4000;
 
+        public const int NutritionNameMinLength = 5;
+        public const int NutritionNameMaxLength = 20;
+
         public const int QuestionTitleMinLength = 10;
         public const int QuestionTitleMaxLength = 100;
         public const int QuestionContentMaxLength = 6000;

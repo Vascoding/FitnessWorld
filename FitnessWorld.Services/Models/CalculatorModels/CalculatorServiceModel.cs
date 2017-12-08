@@ -1,5 +1,7 @@
-﻿using FitnessWorld.Common.Mapping.Contracts;
+﻿using AutoMapper;
+using FitnessWorld.Common.Mapping.Contracts;
 using FitnessWorld.Data.Models;
+using System.Linq;
 
 namespace FitnessWorld.Services.Models.CalculatorModels
 {
@@ -8,6 +10,8 @@ namespace FitnessWorld.Services.Models.CalculatorModels
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public int Quantity { get; set; }
 
         public int ServingSize { get; set; } = 100;
 

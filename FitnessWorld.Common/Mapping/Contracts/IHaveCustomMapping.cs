@@ -2,7 +2,7 @@
 
 namespace FitnessWorld.Common.Mapping.Contracts
 {
-    interface IHaveCustomMapping
+    public interface IHaveCustomMapping
     {
         void ConfigureMapping(Profile mapper);
     }

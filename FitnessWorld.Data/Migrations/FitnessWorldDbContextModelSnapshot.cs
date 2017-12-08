@@ -121,6 +121,10 @@ namespace FitnessWorld.Data.Migrations
 
                     b.Property<int>("Flavour");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
                     b.Property<double>("Portion");
 
                     b.Property<decimal>("Price");
@@ -218,6 +222,8 @@ namespace FitnessWorld.Data.Migrations
                     b.Property<string>("UserId");
 
                     b.Property<int>("FoodId");
+
+                    b.Property<int>("Quantity");
 
                     b.HasKey("UserId", "FoodId");
 

@@ -4,7 +4,6 @@ using FitnessWorld.Services.Models.FoodModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace FitnessWorld.Web.Models.ListingViewModels.CalculatorModels
 {
@@ -13,6 +12,14 @@ namespace FitnessWorld.Web.Models.ListingViewModels.CalculatorModels
         public IEnumerable<FoodServiceModel> Food { get; set; }
 
         public IEnumerable<CalculatorServiceModel> Calculator { get; set; }
+
+        public CalculatorServiceModel Total
+        {
+            get
+            {
+                return this.Calculate();
+            }
+        } 
 
         public int TotalFoodCount { get; set; }
 
@@ -26,5 +33,20 @@ namespace FitnessWorld.Web.Models.ListingViewModels.CalculatorModels
             => this.CurrentPage == this.TotalPages
                 ? this.TotalPages
                 : this.CurrentPage + 1;
+
+        
+
+        private CalculatorServiceModel Calculate()
+        {
+            return new CalculatorServiceModel
+            {
+                Calories = this.Calculator.Sum(c => c.Calories),
+                Carbs = this.Calculator.Sum(c => c.Carbs),
+                Fat = this.Calculator.Sum(f => f.Fat),
+                Fiber = this.Calculator.Sum(f => f.Fiber),
+                Protein = this.Calculator.Sum(p => p.Protein),
+                Sugar = this.Calculator.Sum(s => s.Sugar)
+            };
+        }
     }
 }

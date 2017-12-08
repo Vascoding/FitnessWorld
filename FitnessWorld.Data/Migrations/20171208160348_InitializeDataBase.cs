@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace FitnessWorld.Data.Migrations
 {
-    public partial class InitializeDatabase : Migration
+    public partial class InitializeDataBase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -90,6 +90,7 @@ namespace FitnessWorld.Data.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(maxLength: 4000, nullable: false),
                     Flavour = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(maxLength: 20, nullable: false),
                     Portion = table.Column<double>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
                     Quantity = table.Column<int>(nullable: false)
@@ -263,7 +264,8 @@ namespace FitnessWorld.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    FoodId = table.Column<int>(nullable: false)
+                    FoodId = table.Column<int>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -5,6 +5,16 @@
 
 <h2>@ViewData["Title"]</h2>
 
+<div class="row">
+    <form asp-action="Index">
+        <div class="col-md-6">
+            <input name="searchText" placeholder="Search for food..." />
+            <input type="submit" value="Search" class="btn btn-default" />
+        </div>
+    </form>
+</div>
+
+
 <table class="table">
     <tr>
         <th>Food</th>
@@ -35,37 +45,6 @@
     }
 </table>
 
-<table class="table">
-    <tr>
-        <th>Food</th>
-        <th>ServingSize</th>
-        <th>Calories</th>
-        <th>Fat</th>
-        <th>Protein</th>
-        <th>Carbs</th>
-        <th>Fiber</th>
-        <th>Sugar</th>
-        <th></th>
-    </tr>
-    @foreach (var food in Model.Calculator)
-    {
-        <tr>
-            <td>@food.Name</td>
-            <td>@(food.ServingSize + " gr")</td>
-            <td>@food.Calories</td>
-            <td>@food.Fat</td>
-            <td>@food.Protein</td>
-            <td>@food.Carbs</td>
-            <td>@food.Fiber</td>
-            <td>@food.Sugar</td>
-            <td>
-                <a class="btn btn-danger" asp-area="Calculator" asp-controller="Calculate" asp-action="Remove" asp-route-id="@food.Id">Remove</a>
-            </td>
-        </tr>
-    }
-</table>
-
-
 @if (Model.TotalFoodCount > Model.Food.Count())
 {
     <ul class="pagination">
@@ -83,3 +62,50 @@
         </li>
     </ul>
 }
+
+<h2>Calculation</h2>
+
+<table class="table">
+    <tr>
+        <th>Food</th>
+        <th>Quantity</th>
+        <th>ServingSize</th>
+        <th>Calories</th>
+        <th>Fat</th>
+        <th>Protein</th>
+        <th>Carbs</th>
+        <th>Fiber</th>
+        <th>Sugar</th>
+        <th></th>
+    </tr>
+
+    @foreach (var food in Model.Calculator)
+    {
+        <tr>
+            <td>@food.Name</td>
+            <td>@food.Quantity</td>
+            <td>@(food.ServingSize + " gr")</td>
+            <td>@food.Calories</td>
+            <td>@food.Fat</td>
+            <td>@food.Protein</td>
+            <td>@food.Carbs</td>
+            <td>@food.Fiber</td>
+            <td>@food.Sugar</td>
+            <td>
+                <a class="btn btn-danger" asp-area="Calculator" asp-controller="Calculate" asp-action="Remove" asp-route-id="@food.Id">Remove</a>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td></td>
+        <td></td>
+        <th>Total:</th>
+        <td>@Model.Total.Calories</td>
+        <td>@Model.Total.Fat</td>
+        <td>@Model.Total.Protein</td>
+        <td>@Model.Total.Carbs</td>
+        <td>@Model.Total.Fiber</td>
+        <td>@Model.Total.Sugar</td>
+    </tr>
+
+</table>

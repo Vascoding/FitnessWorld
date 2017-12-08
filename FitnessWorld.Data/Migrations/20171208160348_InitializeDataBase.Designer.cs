@@ -12,8 +12,8 @@ using System;
 namespace FitnessWorld.Data.Migrations
 {
     [DbContext(typeof(FitnessWorldDbContext))]
-    [Migration("20171206180206_InitializeDatabase")]
-    partial class InitializeDatabase
+    [Migration("20171208160348_InitializeDataBase")]
+    partial class InitializeDataBase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -122,6 +122,10 @@ namespace FitnessWorld.Data.Migrations
 
                     b.Property<int>("Flavour");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
                     b.Property<double>("Portion");
 
                     b.Property<decimal>("Price");
@@ -219,6 +223,8 @@ namespace FitnessWorld.Data.Migrations
                     b.Property<string>("UserId");
 
                     b.Property<int>("FoodId");
+
+                    b.Property<int>("Quantity");
 
                     b.HasKey("UserId", "FoodId");
 

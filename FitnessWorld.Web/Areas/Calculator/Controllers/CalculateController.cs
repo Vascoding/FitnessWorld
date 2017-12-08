@@ -1,7 +1,6 @@
 ﻿using FitnessWorld.Data.Models;
 using FitnessWorld.Services.Contracts;
 using FitnessWorld.Web.Models.ListingViewModels.CalculatorModels;
-using FitnessWorld.Web.Models.ListingViewModels.FoodModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -21,19 +20,47 @@ namespace FitnessWorld.Web.Areas.Calculator.Controllers
             this.calculator = calculator;
         }
 
-        public async Task<IActionResult> Index(int page = 1) => this.View(new ListCalculateViewModel
+        public async Task<IActionResult> Index(string searchText, int page = 1)
         {
-            Food = await this.food.AllAsync(page),
-            TotalFoodCount = await this.food.TotalAsync(),
-            Calculator = await this.calculator.FoodToCalculate(userManager.GetUserId(User)),
-            CurrentPage = page
-        });
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                return this.View(new ListCalculateViewModel
+                {
+                    Food = await this.food.AllAsync(page),
+                    TotalFoodCount = await this.food.TotalAsync(),
+                    Calculator = await this.calculator.FoodToCalculate(userManager.GetUserId(User)),
+                    CurrentPage = page
+                });
+            }
+
+            return this.View(new ListCalculateViewModel
+            {
+                Food = await this.food.ResultAsync(searchText, page),
+                TotalFoodCount = await this.food.TotalAsync(),
+                Calculator = await this.calculator.FoodToCalculate(userManager.GetUserId(User)),
+                CurrentPage = page
+            });
+        }
+
 
         public async Task<IActionResult> Add(int id)
         {
+            var model = await this.calculator.Find(id);
+
+            if (model != null)
+            {
+                return this.View(model);
+            }
+
+            return this.RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(int id, int quantity)
+        {
             var userId = this.userManager.GetUserId(User);
 
-            await this.calculator.Add(id, userId);
+            await this.calculator.Add(id, userId, quantity);
 
             return this.RedirectToAction(nameof(Index));
         }

@@ -9,7 +9,12 @@ namespace FitnessWorld.Data.Models
     public class Nutrition
     {
         public int Id { get; set; }
-        
+
+        [Required]
+        [MinLength(NutritionNameMinLength)]
+        [MaxLength(NutritionNameMaxLength)]
+        public string Name { get; set; }
+
         [Range(0, NutritionQuantityMaxValue)]
         public int Quantity { get; set; }
 
