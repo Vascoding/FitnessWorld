@@ -1,0 +1,22 @@
+﻿@model ListQuestionsServiceModel
+@{
+    ViewData["Title"] = "All In Category";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<a class="btn btn-default" asp-controller="Questions" asp-action="Ask" asp-route-id="@Model.CategoryId">Ask Question</a>
+
+@foreach (var question in Model.Questions)
+{
+    <div class="row">
+        <div class="col-md-6 pull-right">
+            <h3><a>@question.Title</a></h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-default" asp-controller="Home" asp-action="Index">Back</a>
+    </div>
+</div>

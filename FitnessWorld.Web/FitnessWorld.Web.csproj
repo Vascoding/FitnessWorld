@@ -44,9 +44,4 @@
     <ProjectReference Include="..\FitnessWorld.Services\FitnessWorld.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Forum\Controllers\" />
-    <Folder Include="Areas\Forum\Views\" />
-  </ItemGroup>
-
 </Project>

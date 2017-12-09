@@ -1,0 +1,24 @@
+﻿@model IEnumerable<CategoryServiceModel>
+@{
+    ViewData["Title"] = "Forum";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+
+
+<h3>Categories</h3>
+
+@foreach (var category in Model)
+{
+
+    <div class="row" style="padding-bottom: 5px">
+        <div class="col-md-6">
+            <a asp-controller="Questions" asp-action="AllInCategory" asp-route-id="@category.Id">@category.Name</a>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-default" asp-area="" asp-controller="Home" asp-action="Index">Back</a>
+    </div>
+</div>
