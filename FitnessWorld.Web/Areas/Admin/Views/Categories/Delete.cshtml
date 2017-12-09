@@ -1,0 +1,23 @@
+﻿@model CategoryCrudModel
+@{
+    ViewData["Title"] = "Delete Category";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" asp-action="Confirm">
+            <hr />
+            <div class="form-group">
+                <input hidden name="id" value="@Model.Id" />
+                <label asp-for="Name"></label>
+                <input readonly asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a class="btn btn-default" asp-area="Admin" asp-controller="Categories" asp-action="Index">Back</a>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CategoryServiceModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-warning" asp-area="Admin" asp-controller="Categories" asp-action="Create">Add Category</a>
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Number Of Questions</th>
+                <th></th>
+            </tr>
+            @foreach (var category in Model)
+            {
+                <tr>
+                    <td>@category.Id</td>
+                    <td>@category.Name</td>
+                    <td>@category.Questions</td>
+                
+                    <td>
+                        <a class="btn btn-warning" asp-area="Admin" asp-controller="Categories" asp-action="Edit" asp-route-id="@category.Id">Edit</a>
+                        <a class="btn btn-danger" asp-area="Admin" asp-controller="Categories" asp-action="Delete" asp-route-id="@category.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-default" asp-area="Admin" asp-controller="Admins" asp-action="Index">Back</a>
+    </div>
+</div>
