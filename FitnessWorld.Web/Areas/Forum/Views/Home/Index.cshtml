@@ -10,10 +10,9 @@
 
 @foreach (var category in Model)
 {
-
     <div class="row" style="padding-bottom: 5px">
         <div class="col-md-6">
-            <a asp-controller="Questions" asp-action="AllInCategory" asp-route-id="@category.Id">@category.Name</a>
+            <a asp-controller="Questions" asp-action="AllInCategory" asp-route-id="@category.Id"><h3>@category.Name</h3></a>
         </div>
     </div>
 }

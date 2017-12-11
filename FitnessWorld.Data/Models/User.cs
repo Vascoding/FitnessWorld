@@ -1,11 +1,19 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FitnessWorld.Data.Constants;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace FitnessWorld.Data.Models
 {
+    using static DataConstants;
+
     public class User : IdentityUser
     {
+        [Required]
+        [MinLength(UserNameMinLength)]
+        [MaxLength(UserNameMaxLength)]
+        public string Name { get; set; }
+
         public List<Question> Questions { get; set; } = new List<Question>();
 
         public List<Answer> Answers { get; set; } = new List<Answer>();

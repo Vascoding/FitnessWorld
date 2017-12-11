@@ -11,7 +11,12 @@
 {
     <div class="row">
         <div class="col-md-6 pull-right">
-            <h3><a>@question.Title</a></h3>
+            <h3><a asp-controller="Answers" asp-action="Index" asp-route-id="@question.Id">@question.Title</a></h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 pull-right">
+            <p>@question.Author @question.Published.ToShortDateString()</p>
         </div>
     </div>
 }

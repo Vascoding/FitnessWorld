@@ -12,9 +12,10 @@ using System;
 namespace FitnessWorld.Data.Migrations
 {
     [DbContext(typeof(FitnessWorldDbContext))]
-    partial class FitnessWorldDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171210231312_InitializeComponents")]
+    partial class InitializeComponents
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

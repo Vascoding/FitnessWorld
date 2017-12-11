@@ -39,6 +39,7 @@ namespace FitnessWorld.Web.Infrastructure.Extensions
 
                         var user = new User
                         {
+                            Name = "Vasko",
                             Email = "admin@abv.bg",
                             UserName = "admin@abv.bg",
                         };

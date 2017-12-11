@@ -1,0 +1,40 @@
+﻿@model ListAnswersServiceModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>@Model.Question.Title</h2>
+
+<div>
+    <span>@Model.Question.Author</span>
+    <span>@Model.Question.AuthorPoints Points</span>
+</div>
+<div>
+    <h3>
+        @Model.Question.Content
+    </h3>
+</div>
+
+<a class="btn btn-default" asp-controller="Answers" asp-action="Create" asp-route-id="@Model.QuestionId">Answer</a>
+
+@foreach (var answer in Model.Answers)
+{
+    <div class="table-bordered">
+        <div class="row">
+            <div class="col-md-6 pull-right">
+                <h3>@answer.Content</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 pull-right">
+                <p>@answer.Author @answer.Published.ToShortDateString()</p>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-default" asp-controller="Answers" asp-action="Create" asp-route-id="@answer.Id">Comment</a>
+}
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-default" asp-controller="Home" asp-action="Index">Back</a>
+    </div>
+</div>
