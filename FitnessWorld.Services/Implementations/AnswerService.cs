@@ -38,7 +38,6 @@ namespace FitnessWorld.Services.Implementations
                 user.Points++;
                 await this.db.SaveChangesAsync();
             }
-
         }
 
         public async Task<ListAnswersServiceModel> AllInQuestionAsync(int id)

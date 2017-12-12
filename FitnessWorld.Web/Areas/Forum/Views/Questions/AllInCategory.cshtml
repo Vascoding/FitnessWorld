@@ -14,8 +14,8 @@
             <h3><a asp-controller="Answers" asp-action="Index" asp-route-id="@question.Id">@question.Title</a></h3>
             @if (this.User.Identity.Name == question.AuthorEmail)
             {
-                <a class="btn btn-warning">Edit</a>
-                <a class="btn btn-danger">Delete</a>
+                <a class="btn btn-warning" asp-controller="Questions" asp-action="Edit" asp-route-id="@question.Id">Edit</a>
+                <a class="btn btn-danger" asp-controller="Questions" asp-action="Delete" asp-route-id="@question.Id">Delete</a>
             }
         </div>
     </div>

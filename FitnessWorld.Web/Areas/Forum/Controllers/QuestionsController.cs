@@ -40,5 +40,33 @@ namespace FitnessWorld.Web.Areas.Forum.Controllers
 
             return this.RedirectToAction(nameof(AllInCategory), new { id = model.CategoryId });
         }
+
+        public async Task<IActionResult> Edit(int id) 
+            => this.View(await this.questions.FindAsync(id));
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(QuestionCrudModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.RedirectToAction(nameof(Edit), new { id = model.Id });
+            }
+
+            await this.questions.EditAsync(model.Id, model.Title, model.Content);
+
+           return this.RedirectToAction(nameof(AllInCategory), new { id = model.CategoryId });
+        }
+
+        
+        public async Task<IActionResult> Delete(int id)
+            => this.View(await this.questions.FindAsync(id));
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(QuestionCrudModel model)
+        {
+            await this.questions.Delete(model.Id);
+
+            return this.RedirectToAction(nameof(AllInCategory), new { id = model.CategoryId });
+        }
     }
 }

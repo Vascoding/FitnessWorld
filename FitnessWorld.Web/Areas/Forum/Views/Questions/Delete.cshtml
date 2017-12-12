@@ -1,0 +1,29 @@
+﻿@model QuestionCrudModel
+@{
+    ViewData["Title"] = "Delete your question";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input readonly asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content"></label>
+                <textarea readonly asp-for="Content" class="form-control" rows="24" cols="24"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <input hidden asp-for="CategoryId" value="@Model.CategoryId" />
+            <input hidden asp-for="UserId" value="@Model.UserId" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a class="btn btn-default" asp-controller="Questions" asp-action="AllInCategory" asp-route-id="@Model.CategoryId">Back</a>
+        </form>
+    </div>
+</div>

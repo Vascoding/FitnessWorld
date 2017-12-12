@@ -10,4 +10,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FitnessWorld.Common\FitnessWorld.Common.csproj" />
+  </ItemGroup>
+
 </Project>
