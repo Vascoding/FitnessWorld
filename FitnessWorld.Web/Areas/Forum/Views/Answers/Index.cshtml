@@ -20,21 +20,49 @@
 @foreach (var answer in Model.Answers)
 {
     <div class="table-bordered">
-        <div class="row">
-            <div class="col-md-6 pull-right">
+        <div class="row col-md-6">
+            <span>@answer.Author</span>
+            <span>@answer.AuthorPoints Points</span>
+            <div class="pull-right">
                 <h3>@answer.Content</h3>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6 pull-right">
-                <p>@answer.Author @answer.Published.ToShortDateString()</p>
+                <p>@answer.Published.ToShortDateString()</p>
+                @if (this.User.Identity.Name == answer.AuthorEmail)
+                {
+                    <a class="btn btn-warning">Edit</a>
+                    <a class="btn btn-danger">Delete</a>
+                }
             </div>
         </div>
+        <h2>@(!answer.Comments.Any() ? "" : "Comments")</h2>
+        @foreach (var comment in answer.Comments)
+        {
+            <div class="table-bordered">
+                <div class="row col-md-6">
+                    <span>@comment.Author</span>
+                    <span>@comment.AuthorPoints Points</span>
+                </div>
+                <div class="row">
+                    <div class="row col-md-6 pull-right">
+                        <h5>@comment.Content</h5>
+                        <p>@comment.Published.ToShortDateString()</p>
+                        @if (this.User.Identity.Name == comment.AuthorEmail)
+                    {
+                            <a class="btn btn-warning">Edit</a>
+                            <a class="btn btn-danger">Delete</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
     </div>
-    <a class="btn btn-default" asp-controller="Answers" asp-action="Create" asp-route-id="@answer.Id">Comment</a>
+    <a class="btn btn-default" asp-controller="Comments" asp-action="Create" asp-route-id="@answer.Id">Comment</a>
 }
 <div class="row">
     <div class="col-md-6">
-        <a class="btn btn-default" asp-controller="Home" asp-action="Index">Back</a>
+        <a class="btn btn-default" asp-controller="Questions" asp-action="AllInCategory" asp-route-id="@Model.CategoryId">Back</a>
     </div>
 </div>

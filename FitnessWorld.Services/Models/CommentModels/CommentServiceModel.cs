@@ -1,28 +1,26 @@
-﻿using FitnessWorld.Common.Mapping.Contracts;
+﻿using AutoMapper;
+using FitnessWorld.Common.Mapping.Contracts;
 using FitnessWorld.Data.Models;
 using System;
-using AutoMapper;
 
-namespace FitnessWorld.Services.Models.QuestionModels
+namespace FitnessWorld.Services.Models.CommentModels
 {
-    public class QuestionServiceModel : IMapFrom<Question>, IHaveCustomMapping
+    public class CommentServiceModel : IMapFrom<Comment>, IHaveCustomMapping
     {
         public int Id { get; set; }
-
-        public string Title { get; set; }
 
         public string Content { get; set; }
 
         public DateTime Published { get; set; }
 
-        public string AuthorEmail { get; set; }
-
         public string Author { get; set; }
+
+        public string AuthorEmail { get; set; }
 
         public int AuthorPoints { get; set; }
 
         public void ConfigureMapping(Profile mapper)
-        => mapper.CreateMap<Question, QuestionServiceModel>()
+        => mapper.CreateMap<Comment, CommentServiceModel>()
             .ForMember(q => q.Author, cfg => cfg
             .MapFrom(q => q.User.Name))
             .ForMember(q => q.AuthorPoints, cfg => cfg

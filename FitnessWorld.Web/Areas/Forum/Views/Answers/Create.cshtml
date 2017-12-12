@@ -19,7 +19,7 @@
             <input hidden asp-for="QuestionId" value="@Model.QuestionId" />
             <input hidden asp-for="UserId" value="@Model.UserId" />
             <button type="submit" class="btn btn-default">Answer</button>
-            <a class="btn btn-default" asp-controller="Home" asp-action="Index">Cancel</a>
+            <a class="btn btn-default" asp-controller="Answers" asp-action="Index" asp-route-id="@Model.QuestionId">Cancel</a>
         </form>
     </div>
 </div>
