@@ -48,6 +48,8 @@ namespace FitnessWorld.Web
             services.AddDomainServices();
 			
             services.AddAutoMapper();
+			
+			services.AddRouting(routing => routing.LowercaseUrls = true);
 
             services.AddMvc(option =>  
             {

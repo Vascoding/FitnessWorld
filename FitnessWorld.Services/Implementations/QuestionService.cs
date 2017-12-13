@@ -58,20 +58,25 @@ namespace FitnessWorld.Services.Implementations
             .ProjectTo<QuestionCrudModel>()
             .FirstOrDefaultAsync();
 
-        public async Task EditAsync(int id, string title, string content)
+        public async Task EditAsync(int id, string title, string content, string userId)
         {
             var question = await this.db.Questions.Where(q => q.Id == id).FirstOrDefaultAsync();
-            question.Title = title;
-            question.Content = content;
 
-            await this.db.SaveChangesAsync();
+            if (question != null && question.UserId == userId) 
+            {
+                question.Title = title;
+                question.Content = content;
+                question.Published = DateTime.UtcNow;
+
+                await this.db.SaveChangesAsync();
+            }
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(int id, string userId)
         {
             var question = await this.db.Questions.FirstOrDefaultAsync(q => q.Id == id);
 
-            if (question != null)
+            if (question != null && question.UserId == userId)
             {
                 this.db.Remove(question);
 

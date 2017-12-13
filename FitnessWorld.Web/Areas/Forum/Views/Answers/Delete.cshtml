@@ -1,0 +1,22 @@
+﻿@model AnswerCrudModel
+@{
+    ViewData["Title"] = "Delete your answer";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+            <hr />
+            <div class="form-group">
+                <label asp-for="Content"></label>
+                <textarea readonly asp-for="Content" class="form-control" rows="24" cols="24"></textarea>
+            </div>
+            <input hidden asp-for="QuestionId" value="@Model.QuestionId" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a class="btn btn-default" asp-controller="Answers" asp-action="Index" asp-route-id="@Model.QuestionId">Cancel</a>
+        </form>
+    </div>
+</div>

@@ -21,7 +21,6 @@
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <input hidden asp-for="CategoryId" value="@Model.CategoryId" />
-            <input hidden asp-for="UserId" value="@Model.UserId" />
             <button type="submit" class="btn btn-danger">Delete</button>
             <a class="btn btn-default" asp-controller="Questions" asp-action="AllInCategory" asp-route-id="@Model.CategoryId">Back</a>
         </form>

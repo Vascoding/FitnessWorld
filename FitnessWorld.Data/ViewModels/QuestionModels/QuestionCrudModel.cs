@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FitnessWorld.Data.ViewModels.QuestionModels
 {
-    using AutoMapper;
     using FitnessWorld.Common.Mapping.Contracts;
     using FitnessWorld.Data.Models;
 
@@ -14,8 +13,6 @@ namespace FitnessWorld.Data.ViewModels.QuestionModels
         public string Title { get; set; }
         
         public string Content { get; set; }
-
-        public string UserId { get; set; }
 
         public int CategoryId { get; set; }
     }

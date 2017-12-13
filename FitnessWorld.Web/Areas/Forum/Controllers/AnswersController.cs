@@ -18,7 +18,7 @@ namespace FitnessWorld.Web.Areas.Forum.Controllers
             this.answers = answers;
         }
 
-        public async Task<IActionResult> Index(int id) 
+        public async Task<IActionResult> Index(int id)
             => this.View(await this.answers.AllInQuestionAsync(id));
 
         public IActionResult Create(int id)
@@ -38,6 +38,38 @@ namespace FitnessWorld.Web.Areas.Forum.Controllers
 
             await this.answers.CreateAsync(model.Content, model.UserId, model.QuestionId);
             return this.RedirectToAction(nameof(Index), new { id = model.QuestionId });
+        }
+
+        public async Task<IActionResult> Edit(int id)
+            => this.View(await this.answers.FindAsync(id));
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(AnswerCrudModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.RedirectToAction(nameof(Index), new { id = model.QuestionId });
+            }
+
+            await this.answers.EditAsync(model.Id, model.Content, this.GetUserId());
+
+            return this.RedirectToAction(nameof(Index), new { id = model.QuestionId });
+        }
+
+        public async Task<IActionResult> Delete(int id)
+            => this.View(await this.answers.FindAsync(id));
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(AnswerCrudModel model)
+        {
+            await this.answers.DeleteAsync(model.Id, this.GetUserId());
+
+            return this.RedirectToAction(nameof(Index), new { id = model.QuestionId });
+        }
+
+        private string GetUserId()
+        {
+            return this.userManager.GetUserId(User);
         }
     }
 }

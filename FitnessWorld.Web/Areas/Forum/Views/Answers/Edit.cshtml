@@ -1,6 +1,6 @@
-﻿@model QuestionCrudModel
+﻿@model AnswerCrudModel
 @{
-    ViewData["Title"] = "Edit your question";
+    ViewData["Title"] = "Edit your answer";
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -11,18 +11,13 @@
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Title"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Content"></label>
                 <textarea asp-for="Content" class="form-control" rows="24" cols="24"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
-            <input hidden asp-for="CategoryId" value="@Model.CategoryId" />
-            <button type="submit" class="btn btn-warning">Edit</button>
-            <a class="btn btn-default" asp-controller="Questions" asp-action="AllInCategory" asp-route-id="@Model.CategoryId">Back</a>
+            <input hidden asp-for="QuestionId" value="@Model.QuestionId" />
+            <button type="submit" class="btn btn-default">Edit</button>
+            <a class="btn btn-default" asp-controller="Answers" asp-action="Index" asp-route-id="@Model.QuestionId">Cancel</a>
         </form>
     </div>
 </div>

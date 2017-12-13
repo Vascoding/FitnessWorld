@@ -40,6 +40,38 @@ namespace FitnessWorld.Web.Areas.Forum.Controllers
             var questionid = await this.comments.CreateAsync(model.Content, model.UserId, model.AnswerId);
 
             return this.RedirectToAction(nameof(AnswersController.Index), "Answers", new { id = questionid });
-        } 
+        }
+
+        public async Task<IActionResult> Edit(int id) 
+            => this.View(await this.comments.FindAsync(id));
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(CommentCrudModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.RedirectToAction(nameof(AnswersController.Index), "Answers", new { id = model.QuestionId });
+            }
+
+            await this.comments.EditAsync(model.Id, model.Content, this.GetUserId());
+
+            return this.RedirectToAction(nameof(AnswersController.Index), "Answers", new { id = model.QuestionId });
+        }
+
+        public async Task<IActionResult> Delete(int id)
+          => this.View(await this.comments.FindAsync(id));
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(CommentCrudModel model)
+        {
+            await this.comments.DeleteAsync(model.Id, this.GetUserId());
+
+            return this.RedirectToAction(nameof(AnswersController.Index), "Answers", new { id = model.QuestionId });
+        }
+
+        private string GetUserId()
+        {
+            return this.userManager.GetUserId(User);
+        }
     }
 }

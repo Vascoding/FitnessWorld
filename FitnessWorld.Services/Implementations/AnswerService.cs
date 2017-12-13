@@ -1,6 +1,7 @@
 ﻿using AutoMapper.QueryableExtensions;
 using FitnessWorld.Data;
 using FitnessWorld.Data.Models;
+using FitnessWorld.Data.ViewModels.AnswerModels;
 using FitnessWorld.Services.Contracts;
 using FitnessWorld.Services.Models.AnswerModels;
 using FitnessWorld.Services.Models.CommentModels;
@@ -59,6 +60,38 @@ namespace FitnessWorld.Services.Implementations
                 Question = questions,
                 Answers = answers
             };
+        }
+
+        public async Task<AnswerCrudModel> FindAsync(int id)
+            => await this.db
+            .Answers
+            .Where(a => a.Id == id)
+            .ProjectTo<AnswerCrudModel>()
+            .FirstOrDefaultAsync();
+
+        public async Task EditAsync(int id, string content, string userId)
+        {
+            var answer = await this.db.Answers.FirstOrDefaultAsync(a => a.Id == id);
+
+            if (answer != null && answer.UserId == userId)
+            {
+                answer.Content = content;
+                answer.Published = DateTime.UtcNow;
+
+                await this.db.SaveChangesAsync();
+            }
+        }
+
+        public async Task DeleteAsync(int id, string userId)
+        {
+            var answer = await this.db.Answers.FirstOrDefaultAsync(a => a.Id == id);
+
+            if (answer != null && answer.UserId == userId)
+            {
+                this.db.Answers.Remove(answer);
+
+                await this.db.SaveChangesAsync();
+            }
         }
     }
 }

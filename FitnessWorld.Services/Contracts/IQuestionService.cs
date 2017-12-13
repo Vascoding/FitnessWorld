@@ -13,8 +13,8 @@ namespace FitnessWorld.Services.Contracts
 
         Task<QuestionCrudModel> FindAsync(int id);
 
-        Task EditAsync(int id, string title, string content);
+        Task EditAsync(int id, string title, string content, string userId);
 
-        Task Delete(int id);
+        Task Delete(int id, string userId);
     }
 }
