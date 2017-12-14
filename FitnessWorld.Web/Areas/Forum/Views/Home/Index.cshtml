@@ -1,23 +1,81 @@
-﻿@model IEnumerable<CategoryServiceModel>
+﻿@model ListQuestionsViewModel
 @{
     ViewData["Title"] = "Forum";
 }
 
 <h2 class="text-center">@ViewData["Title"]</h2>
 
-
-<h3>Categories</h3>
-
-@foreach (var category in Model)
-{
-    <div class="row" style="padding-bottom: 5px">
+<div class="row">
+    <form asp-action="Index">
         <div class="col-md-6">
-            <a asp-controller="Questions" asp-action="AllInCategory" asp-route-id="@category.Id"><h3>@category.Name</h3></a>
+            <input name="searchText" placeholder="Search for food..." />
+            <input type="submit" value="Search" class="btn btn-default" />
+            <a class="btn btn-default" asp-action="Index">All Questions</a>
+        </div>
+    </form>
+</div>
+
+<li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        Categories<span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+        <li>
+            @foreach (var category in Model.Categories)
+            {
+                <a asp-controller="Questions" asp-action="AllInCategory" asp-route-id="@category.Id"><h3>@category.Name</h3></a>
+            }
+        </li>
+    </ul>
+</li>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-6 pull-right">
+        <h3>Questions</h3>
+    </div>
+</div>
+@foreach (var question in Model.Questions)
+{
+    <div class="row">
+        <div class="col-md-6 pull-right">
+            <h3><a asp-controller="Answers" asp-action="Index" asp-route-id="@question.Id">@question.Title</a></h3>
+            @if (this.User.Identity.Name == question.AuthorEmail)
+                {
+                <a class="btn btn-warning" asp-controller="Questions" asp-action="Edit" asp-route-id="@question.Id">Edit</a>
+                <a class="btn btn-danger" asp-controller="Questions" asp-action="Delete" asp-route-id="@question.Id">Delete</a>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 pull-right">
+            <p>@question.Author @question.Published.ToShortDateString()</p>
         </div>
     </div>
 }
+
+
 <div class="row">
     <div class="col-md-6">
         <a class="btn btn-default" asp-area="" asp-controller="Home" asp-action="Index">Back</a>
     </div>
 </div>
+
+@if (Model.TotalQuestionsCount > Model.Questions.Count())
+{
+    <ul class="pagination">
+        <li class="@(Model.CurrentPage == 1 ? "disabled" : string.Empty)">
+            <a asp-route-page="@Model.PreviousPage"
+               aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="@(Model.CurrentPage == Model.TotalPages ? "disabled" : string.Empty)">
+            <a asp-route-page="@Model.NextPage"
+               aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+}

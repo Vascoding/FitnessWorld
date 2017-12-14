@@ -2,10 +2,12 @@
 using FitnessWorld.Data;
 using FitnessWorld.Data.Models;
 using FitnessWorld.Data.ViewModels.QuestionModels;
+using FitnessWorld.Services.Constants;
 using FitnessWorld.Services.Contracts;
 using FitnessWorld.Services.Models.QuestionModels;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,7 +24,7 @@ namespace FitnessWorld.Services.Implementations
 
         public async Task Create(string title, string content, int categoryId, string userId)
         {
-            if (this.db.Categories.FirstOrDefault(c => c.Id == categoryId) != null && 
+            if (this.db.Categories.FirstOrDefault(c => c.Id == categoryId) != null &&
                 this.db.Users.FirstOrDefault(u => u.Id == userId) != null)
             {
                 var question = new Question
@@ -62,7 +64,7 @@ namespace FitnessWorld.Services.Implementations
         {
             var question = await this.db.Questions.Where(q => q.Id == id).FirstOrDefaultAsync();
 
-            if (question != null && question.UserId == userId) 
+            if (question != null && question.UserId == userId)
             {
                 question.Title = title;
                 question.Content = content;
@@ -83,5 +85,23 @@ namespace FitnessWorld.Services.Implementations
                 await this.db.SaveChangesAsync();
             }
         }
+
+        public async Task<IEnumerable<QuestionServiceModel>> ResultAsync(string searchText)
+            => await this.db
+            .Questions
+            .Where(q => q.Title.ToLower().Contains(searchText.ToLower())
+            || q.Content.ToLower().Contains(searchText.ToLower()))
+            .ProjectTo<QuestionServiceModel>()
+            .ToListAsync();
+
+        public async Task<IEnumerable<QuestionServiceModel>> AllAsync(int page = 1)
+           => await this.db
+           .Questions
+           .Skip((page - 1) * ServiceConstants.PageSize)
+           .Take(ServiceConstants.PageSize)
+           .ProjectTo<QuestionServiceModel>()
+           .ToListAsync();
+
+        public async Task<int> TotalAsync() => await this.db.Questions.CountAsync();
     }
 }

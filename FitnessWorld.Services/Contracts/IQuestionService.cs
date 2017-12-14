@@ -16,5 +16,11 @@ namespace FitnessWorld.Services.Contracts
         Task EditAsync(int id, string title, string content, string userId);
 
         Task Delete(int id, string userId);
+
+        Task<IEnumerable<QuestionServiceModel>> ResultAsync(string searchText);
+
+        Task<IEnumerable<QuestionServiceModel>> AllAsync(int page = 1);
+
+        Task<int> TotalAsync();
     }
 }
