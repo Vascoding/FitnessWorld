@@ -93,5 +93,23 @@ namespace FitnessWorld.Services.Implementations
                 await this.db.SaveChangesAsync();
             }
         }
+
+        public async Task BestAnswer(int id, string userId, int questionId)
+        {
+            var answer = await this.db.Answers.FirstOrDefaultAsync(a => a.Id == id);
+            var user = await this.db.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var question = await this.db.Questions.FirstOrDefaultAsync(u => u.Id == questionId);
+            var answers = await this.db.Answers.Where(a => a.QuestionId == questionId).ToListAsync();
+            var userQuestion = this.db.Users.FirstOrDefault(u => u.Questions.FirstOrDefault(q => q.Id == question.Id) != null);
+            var reciever = await this.db.Users.FirstOrDefaultAsync(u => u.Id == answer.UserId);
+
+            if (answer != null && user != null && userQuestion != null && userQuestion == user && !answers.Any(a => a.IsBestAnswer))
+            {
+                answer.IsBestAnswer = true;
+                reciever.Points += 10;
+
+                await this.db.SaveChangesAsync();
+            }
+        }
     }
 }

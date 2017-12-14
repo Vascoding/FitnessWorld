@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace FitnessWorld.Data.Migrations
 {
-    public partial class InitializeDataBase : Migration
+    public partial class InitializeDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -34,6 +34,7 @@ namespace FitnessWorld.Data.Migrations
                     EmailConfirmed = table.Column<bool>(nullable: false),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    Name = table.Column<string>(maxLength: 15, nullable: false),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     PasswordHash = table.Column<string>(nullable: true),
@@ -207,30 +208,6 @@ namespace FitnessWorld.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserResponder",
-                columns: table => new
-                {
-                    MainUserId = table.Column<string>(nullable: false),
-                    ResponderId = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserResponder", x => new { x.MainUserId, x.ResponderId });
-                    table.ForeignKey(
-                        name: "FK_UserResponder_AspNetUsers_MainUserId",
-                        column: x => x.MainUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_UserResponder_AspNetUsers_ResponderId",
-                        column: x => x.ResponderId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Questions",
                 columns: table => new
                 {
@@ -291,6 +268,7 @@ namespace FitnessWorld.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Content = table.Column<string>(maxLength: 6000, nullable: false),
+                    IsBestAnswer = table.Column<bool>(nullable: false),
                     Published = table.Column<DateTime>(nullable: false),
                     QuestionId = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
@@ -413,11 +391,6 @@ namespace FitnessWorld.Data.Migrations
                 name: "IX_UserFood_FoodId",
                 table: "UserFood",
                 column: "FoodId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserResponder_ResponderId",
-                table: "UserResponder",
-                column: "ResponderId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -445,9 +418,6 @@ namespace FitnessWorld.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserFood");
-
-            migrationBuilder.DropTable(
-                name: "UserResponder");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

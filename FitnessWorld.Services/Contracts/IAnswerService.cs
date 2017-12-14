@@ -15,5 +15,7 @@ namespace FitnessWorld.Services.Contracts
         Task EditAsync(int id, string content, string userId);
 
         Task DeleteAsync(int id, string userId);
+
+        Task BestAnswer(int id, string userId, int questionId);
     }
 }

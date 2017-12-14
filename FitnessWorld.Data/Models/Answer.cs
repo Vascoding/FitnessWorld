@@ -21,6 +21,8 @@ namespace FitnessWorld.Data.Models
 
         public int QuestionId { get; set; }
 
+        public bool IsBestAnswer { get; set; }
+
         public Question Question { get; set; }
 
         public DateTime Published { get; set; }

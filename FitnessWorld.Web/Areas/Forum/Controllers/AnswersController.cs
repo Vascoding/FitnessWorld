@@ -67,6 +67,14 @@ namespace FitnessWorld.Web.Areas.Forum.Controllers
             return this.RedirectToAction(nameof(Index), new { id = model.QuestionId });
         }
 
+        [HttpPost]
+        public async Task<IActionResult> BestAnswer(int answerId, int questionId)
+        {
+            await this.answers.BestAnswer(answerId, this.GetUserId(), questionId);
+
+            return this.RedirectToAction(nameof(Index), new { id = questionId });
+        }
+
         private string GetUserId()
         {
             return this.userManager.GetUserId(User);

@@ -20,6 +20,8 @@ namespace FitnessWorld.Services.Models.AnswerModels
 
         public string AuthorEmail { get; set; }
 
+        public bool IsBestAnswer { get; set; }
+
         public int AuthorPoints { get; set; }
 
         public IEnumerable<CommentServiceModel> Comments { get; set; }
