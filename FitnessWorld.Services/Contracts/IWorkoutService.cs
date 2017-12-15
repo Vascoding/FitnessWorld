@@ -7,7 +7,9 @@ namespace FitnessWorld.Services.Contracts
 {
     public interface IWorkoutService
     {
-        Task<IEnumerable<WorkoutServiceModel>> AllAsync();
+        Task<IEnumerable<WorkoutServiceModel>> AllAsync(int page = 1);
+
+        Task<IEnumerable<WorkoutServiceModel>> AllResult(string searchText);
 
         Task AddAsync(string name, string description, string videoId);
 
@@ -16,5 +18,7 @@ namespace FitnessWorld.Services.Contracts
         Task EditAsync(int id, string name, string description, string videoId);
 
         Task DeleteAsync(int id);
+
+        Task<int> TotalAsync();
     }
 }

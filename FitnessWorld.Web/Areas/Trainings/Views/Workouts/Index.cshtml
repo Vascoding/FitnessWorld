@@ -1,6 +1,47 @@
-﻿@model IEnumerable<WorkoutServiceModel>
+﻿@model ListWorkoutModel
 @{
     ViewData["Title"] = "All Workouts";
 }
 
 <h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <form asp-action="Index">
+        <div class="col-md-6">
+            <input name="searchText" placeholder="Search for workout..." />
+            <input type="submit" value="Search" class="btn btn-default" />
+            <a class="btn btn-default" asp-area="Trainings" asp-controller="Workouts" asp-action="Index">All Workouts</a>
+        </div>
+    </form>
+</div>
+
+@foreach (var workout in Model.Workout)
+{
+    <div class="container">
+        <div class="row">
+            <div>@workout.Name</div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/@workout.VideoId" frameborder="0" allowfullscreen></iframe>
+            <div class="col-md-4 pull-right">
+                @workout.Description
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.TotalWorkoutCount > Model.Workout.Count())
+{
+    <ul class="pagination">
+        <li class="@(Model.CurrentPage == 1 ? "disabled" : string.Empty)">
+            <a asp-route-page="@Model.PreviousPage"
+               aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="@(Model.CurrentPage == Model.TotalPages ? "disabled" : string.Empty)">
+            <a asp-route-page="@Model.NextPage"
+               aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+}

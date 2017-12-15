@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WorkoutServiceModel>
+﻿@model ListWorkoutModel
 @{
     ViewData["Title"] = "Add Workouts";
 }
@@ -16,20 +16,33 @@
     </form>
 </div>
 
-@foreach (var workout in Model)
+@foreach (var workout in Model.Workout)
 {
     <div class="container">
         <div class="row">
             <div>@workout.Name</div>
-            <div>@workout.Description Points</div>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/@workout.VideoId" frameborder="0" allowfullscreen>
-            </iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/@workout.VideoId" frameborder="0" allowfullscreen></iframe>
             <div class="col-md-4 pull-right">
-                <a asp-area="Admin" asp-controller="Workouts" asp-action="Edit" asp-route-id="@workout.Id" class="btn btn-warning">Edit</a>
-                <a asp-area="Admin" asp-controller="Workouts" asp-action="Delete" asp-route-id="@workout.Id" class="btn btn-danger">Delete</a>
+                @workout.Description
             </div>
-            
         </div>
     </div>
+}
 
+@if (Model.TotalWorkoutCount > Model.Workout.Count())
+{
+    <ul class="pagination">
+        <li class="@(Model.CurrentPage == 1 ? "disabled" : string.Empty)">
+            <a asp-route-page="@Model.PreviousPage"
+               aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="@(Model.CurrentPage == Model.TotalPages ? "disabled" : string.Empty)">
+            <a asp-route-page="@Model.NextPage"
+               aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
 }

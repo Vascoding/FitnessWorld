@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using FitnessWorld.Data.Models;
 using FitnessWorld.Data.ViewModels.WorkoutModels;
+using FitnessWorld.Services.Constants;
 
 namespace FitnessWorld.Services.Implementations
 {
@@ -20,11 +21,21 @@ namespace FitnessWorld.Services.Implementations
             this.db = db;
         }
 
-        public async Task<IEnumerable<WorkoutServiceModel>> AllAsync()
+        public async Task<IEnumerable<WorkoutServiceModel>> AllAsync(int page = 1)
             => await this.db
-            .Workouts
-            .ProjectTo<WorkoutServiceModel>()
-            .ToListAsync();
+             .Workouts
+             .Skip((page - 1) * ServiceConstants.PageSize)
+             .Take(ServiceConstants.PageSize)
+             .ProjectTo<WorkoutServiceModel>()
+             .ToListAsync();
+
+        public async Task<IEnumerable<WorkoutServiceModel>> AllResult(string searchText)
+            =>  await this.db
+                .Workouts
+                .Where(w => w.Name.ToLower().Contains(searchText.ToLower()) || w.Description.ToLower().Contains(searchText.ToLower()))
+                .ProjectTo<WorkoutServiceModel>()
+                .ToListAsync();
+
 
         public async Task AddAsync(string name, string description, string videoId)
         {
@@ -39,7 +50,7 @@ namespace FitnessWorld.Services.Implementations
             await this.db.SaveChangesAsync();
         }
 
-        public async Task<WorkoutCrudModel> FindAsync(int id) 
+        public async Task<WorkoutCrudModel> FindAsync(int id)
             => await this.db
             .Workouts
             .Where(w => w.Id == id)
@@ -71,5 +82,7 @@ namespace FitnessWorld.Services.Implementations
                 await this.db.SaveChangesAsync();
             }
         }
+
+        public async Task<int> TotalAsync() => await this.db.Workouts.CountAsync();
     }
 }

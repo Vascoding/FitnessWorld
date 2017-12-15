@@ -1,4 +1,5 @@
 ﻿using FitnessWorld.Services.Contracts;
+using FitnessWorld.Web.Models.ListingViewModels.WorkoutModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -13,7 +14,22 @@ namespace FitnessWorld.Web.Areas.Trainings.Controllers
             this.workouts = workouts;
         }
 
-        public async Task<IActionResult> Index()
-            => this.View(await this.workouts.AllAsync());
+        public async Task<IActionResult> Index(string searchText, int page = 1)
+        {
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                return this.View(new ListWorkoutModel
+                {
+                    Workout = await this.workouts.AllAsync(page),
+                    CurrentPage = page,
+                    TotalWorkoutCount = await this.workouts.TotalAsync()
+                });
+            }
+
+            return this.View(new ListWorkoutModel
+            {
+                Workout = await this.workouts.AllResult(searchText)
+            });
+        }
     }
 }
