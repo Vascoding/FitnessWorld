@@ -23,7 +23,7 @@ namespace FitnessWorld.Data
 
         public DbSet<UserFood> UserFood { get; set; }
 
-        public DbSet<Nutrition> Nutritions { get; set; }
+        public DbSet<Workout> Workouts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

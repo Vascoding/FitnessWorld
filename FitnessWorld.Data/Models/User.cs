@@ -20,9 +20,6 @@ namespace FitnessWorld.Data.Models
 
         public List<Answer> Answers { get; set; } = new List<Answer>();
 
-        [NotMapped]
-        public List<int> BestAnswers { get; set; } = new List<int>();
-
         public List<Comment> Comments { get; set; } = new List<Comment>();
 
         public List<UserFood> Food { get; set; } = new List<UserFood>();

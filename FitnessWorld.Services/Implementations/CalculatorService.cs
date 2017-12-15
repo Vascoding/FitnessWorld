@@ -24,6 +24,7 @@ namespace FitnessWorld.Services.Implementations
         {
             
             var userFood = await this.db.UserFood.FirstOrDefaultAsync(uf => uf.UserId == userId && uf.FoodId == foodId);
+            
 
             if (userFood == null)
             {
@@ -40,10 +41,14 @@ namespace FitnessWorld.Services.Implementations
                         UserId = user.Id,
                         Quantity = quantity
                     });
-
-                    await this.db.SaveChangesAsync();
                 }
             }
+            else
+            {
+                userFood.Quantity = quantity;
+            }
+
+            await this.db.SaveChangesAsync();
         }
 
         public async Task Remove(int foodId, string userId)

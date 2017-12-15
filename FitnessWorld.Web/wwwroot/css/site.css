@@ -33,3 +33,25 @@
         display: none;
     }
 }
+
+div .container {
+    margin: 22px 15px 15px 10px;
+    border: ridge;
+}
+
+div .comment {
+    margin: 5px -40px 22px 202px;
+    border: groove;
+}
+
+div .row {
+    margin: 5px;
+}
+
+div .best.col-md-2 {
+    margin: 25px;
+    border: groove;
+    font-size: large;
+    background-color: burlywood;
+    text-align: center;
+}

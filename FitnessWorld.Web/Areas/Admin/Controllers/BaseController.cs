@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FitnessWorld.Web.Areas.Admin.Controllers
 {
     [Authorize(Roles = RoleConstants.Admin)]
-    [Area("Admin")]
+    [Area(AreaConstants.Admin)]
     public class BaseController : Controller
     {
     }

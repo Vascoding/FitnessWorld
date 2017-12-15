@@ -1,11 +1,9 @@
 ﻿using FitnessWorld.Web.Infrastructure.Constants;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FitnessWorld.Web.Areas.Forum.Controllers
+namespace FitnessWorld.Web.Areas.Trainings.Controllers
 {
-    [Area(AreaConstants.Forum)]
-    [Authorize]
+    [Area(AreaConstants.Trainings)]
     public class BaseController : Controller
     {
     }

@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using FitnessWorld.Web.Infrastructure.Constants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessWorld.Web.Areas.Calculator.Controllers
 {
-    [Area("Calculator")]
+    [Area(AreaConstants.Calculator)]
     [Authorize]
     public class BaseController : Controller
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace FitnessWorld.Data.Migrations
 {
-    public partial class InitializeDatabase : Migration
+    public partial class InitialDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -84,21 +84,18 @@ namespace FitnessWorld.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Nutritions",
+                name: "Workouts",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(maxLength: 4000, nullable: false),
-                    Flavour = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 20, nullable: false),
-                    Portion = table.Column<double>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false)
+                    VideoId = table.Column<string>(maxLength: 11, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Nutritions", x => x.Id);
+                    table.PrimaryKey("PK_Workouts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -414,10 +411,10 @@ namespace FitnessWorld.Data.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "Nutritions");
+                name: "UserFood");
 
             migrationBuilder.DropTable(
-                name: "UserFood");
+                name: "Workouts");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

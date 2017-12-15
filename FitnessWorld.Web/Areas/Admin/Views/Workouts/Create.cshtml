@@ -1,0 +1,36 @@
+﻿@model WorkoutViewModel
+@{
+    ViewData["Title"] = "Add workout video";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VideoId"></label>
+                <input asp-for="VideoId" class="form-control" />
+                <span asp-validation-for="VideoId" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-default">Add</button>
+            <a class="btn btn-default" asp-area="Trainings" asp-controller="Workouts" asp-action="Index">Back</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
