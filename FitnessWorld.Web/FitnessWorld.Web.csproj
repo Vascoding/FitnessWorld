@@ -44,4 +44,8 @@
     <ProjectReference Include="..\FitnessWorld.Services\FitnessWorld.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>

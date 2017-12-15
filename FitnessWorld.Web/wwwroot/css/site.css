@@ -21,9 +21,19 @@
     width: 100%;
 }
 
+.carousel-inner.item active {
+    width: 1000px;
+    height: 600px;
+}
+
 /* QR code generator */
 #qrCode {
     margin: 15px;
+}
+
+#myCarousel.carousel slide {
+    width: 200px;
+    height: 200px;
 }
 
 /* Hide/rearrange for smaller screens */
