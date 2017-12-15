@@ -25,6 +25,10 @@
             <div class="col-md-4 pull-right">
                 @workout.Description
             </div>
+            <div class="col-md-3 pull-right">
+                <a class="btn btn-warning" asp-area="Admin" asp-controller="Workouts" asp-action="Edit" asp-route-id="@workout.Id">Edit</a>
+                <a class="btn btn-danger" asp-area="Admin" asp-controller="Workouts" asp-action="Delete" asp-route-id="@workout.Id">Delete</a>
+            </div>
         </div>
     </div>
 }

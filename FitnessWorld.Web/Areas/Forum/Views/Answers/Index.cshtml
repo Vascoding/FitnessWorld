@@ -40,7 +40,7 @@
                     <form method="post" asp-controller="Answers" asp-action="BestAnswer">
                         <input hidden asp-for="QuestionId" value="@Model.QuestionId" />
                         <input hidden name="answerId" value="@answer.Id" />
-                        <button type="submit" class="btn btn-default">Best Answer</button>
+                        <button type="submit" class="btn btn-primary">Make Best Answer</button>
                     </form>
                 }
 
