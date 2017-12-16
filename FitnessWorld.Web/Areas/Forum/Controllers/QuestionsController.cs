@@ -1,6 +1,7 @@
 ﻿using FitnessWorld.Data.Models;
 using FitnessWorld.Data.ViewModels.QuestionModels;
 using FitnessWorld.Services.Contracts;
+using FitnessWorld.Web.Models.ListingViewModels.ForumModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -18,8 +19,13 @@ namespace FitnessWorld.Web.Areas.Forum.Controllers
             this.questions = questions;
         }
 
-        public async Task<IActionResult> AllInCategory(int id)
-            => this.View(await this.questions.AllInCategoryAsync(id));
+        public async Task<IActionResult> AllInCategory(int id, int page = 1)
+            => this.View(new ListQuestionsInCategoryViewModel
+            {
+                Questions = await this.questions.AllInCategoryAsync(id, page),
+                TotalQuestionsCount = await this.questions.TotalInCategoryAsync(id),
+                CurrentPage = page
+            });
 
         public IActionResult Ask(int id)
         {

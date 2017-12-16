@@ -9,7 +9,7 @@ namespace FitnessWorld.Services.Contracts
     {
         Task Create(string title, string content, int categoryId, string userId);
 
-        Task<ListQuestionsServiceModel> AllInCategoryAsync(int id);
+        Task<ListQuestionsServiceModel> AllInCategoryAsync(int id, int page = 1);
 
         Task<QuestionCrudModel> FindAsync(int id);
 
@@ -22,5 +22,9 @@ namespace FitnessWorld.Services.Contracts
         Task<IEnumerable<QuestionServiceModel>> AllAsync(int page = 1);
 
         Task<int> TotalAsync();
+
+        Task<IEnumerable<QuestionServiceModel>> LastAddedAsync();
+
+        Task<int> TotalInCategoryAsync(int id);
     }
 }

@@ -20,5 +20,7 @@ namespace FitnessWorld.Services.Contracts
         Task DeleteAsync(int id);
 
         Task<int> TotalAsync();
+
+        Task<IEnumerable<WorkoutServiceModel>> LastAddedAsync();
     }
 }

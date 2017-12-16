@@ -1,16 +1,13 @@
 ﻿using FitnessWorld.Services.Constants;
-using FitnessWorld.Services.Models.CategoriesModels;
 using FitnessWorld.Services.Models.QuestionModels;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace FitnessWorld.Web.Models.ListingViewModels.ForumModels
 {
-    public class ListQuestionsViewModel
+    public class ListQuestionsInCategoryViewModel
     {
-        public IEnumerable<QuestionServiceModel> Questions { get; set; }
-
-        public IEnumerable<CategoryServiceModel> Categories { get; set; }
+        public ListQuestionsServiceModel Questions { get; set; }
 
         public int TotalQuestionsCount { get; set; }
 

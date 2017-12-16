@@ -1,29 +1,29 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using FitnessWorld.Web.Models;
+using FitnessWorld.Web.Models.ListingViewModels.HomeModels;
+using FitnessWorld.Services.Contracts;
+using System.Threading.Tasks;
 
 namespace FitnessWorld.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IQuestionService questions;
+        private readonly IWorkoutService workouts;
+
+        public HomeController(IQuestionService questions, IWorkoutService workouts)
         {
-            return View();
+            this.questions = questions;
+            this.workouts = workouts;
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
+        public async Task<IActionResult> Index()
+            => this.View(new WorkoutsQuestionsViewModel
+            {
+                Questions = await this.questions.LastAddedAsync(),
+                Workouts = await this.workouts.LastAddedAsync()
+            });
 
         public IActionResult Error()
         {

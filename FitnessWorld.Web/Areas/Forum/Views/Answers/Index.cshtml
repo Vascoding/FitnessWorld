@@ -3,7 +3,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>@Model.Question.Title</h2>
+<h1>@Model.Question.Title</h1>
 
 <div>
     <span>@Model.Question.Author</span>
@@ -14,8 +14,9 @@
         @Model.Question.Content
     </h2>
 </div>
-
-<a class="btn btn-default" asp-controller="Answers" asp-action="Create" asp-route-id="@Model.QuestionId">Answer</a>
+<hr />
+<hr />
+<a class="btn btn-primary" asp-controller="Answers" asp-action="Create" asp-route-id="@Model.QuestionId">Answer</a>
 
 @foreach (var answer in Model.Answers)
 {
@@ -47,8 +48,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 pull-right">
-                <p>@answer.Published.ToShortDateString()</p>
+            <div class="col-md-2 pull-right">
+                <p>@answer.Published</p>
                 @if (this.User.Identity.Name == answer.AuthorEmail)
                 {
                     <a class="btn btn-warning" asp-controller="Answers" asp-action="Edit" asp-route-id="@answer.Id">Edit</a>
@@ -56,7 +57,7 @@
                 }
             </div>
         </div>
-        <a class="btn btn-default" asp-controller="Comments" asp-action="Create" asp-route-id="@answer.Id">Comment</a>
+        <a class="btn btn-info" asp-controller="Comments" asp-action="Create" asp-route-id="@answer.Id">Comment</a>
     </div>
     @foreach (var comment in answer.Comments)
     {
@@ -66,9 +67,9 @@
                 <span>@comment.AuthorPoints Points</span>
             </div>
             <div class="row">
-                <div class="row col-md-4 pull-right">
+                <div class="row col-md-12 pull-right">
                     <h5>@comment.Content</h5>
-                    <p>@comment.Published.ToShortDateString()</p>
+                    <p>@comment.Published</p>
                     @if (this.User.Identity.Name == comment.AuthorEmail)
                     {
                         <a class="btn btn-warning" asp-controller="Comments" asp-action="Edit" asp-route-id="@comment.Id">Edit</a>

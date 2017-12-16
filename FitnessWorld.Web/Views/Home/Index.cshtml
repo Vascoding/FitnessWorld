@@ -1,4 +1,5 @@
-﻿@{
+﻿@model WorkoutsQuestionsViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -16,8 +17,8 @@
             <img src="https://www.muscleprodigy.com/wp-content/uploads/2015/06/wallpaper1.jpg" style="width: 1000px; height: 600px;" class="img-responsive" />
             <div class="carousel-caption" role="option">
                 <p>
-                    Register to our site and learn everithing for healty body
-                    <a class="btn btn-default" asp-area="" asp-controller="Account" asp-action="Register">
+                    Register to our site and learn everithing for healthy body
+                    <a class="btn btn-info" asp-area="" asp-controller="Account" asp-action="Register">
                         Register
                     </a>
                 </p>
@@ -28,7 +29,7 @@
             <div class="carousel-caption" role="option">
                 <p>
                     Ask questions in our forum
-                    <a class="btn btn-default" asp-area="Forum" asp-controller="Home" asp-action="Index">
+                    <a class="btn btn-info" asp-area="Forum" asp-controller="Home" asp-action="Index">
                         Learn More
                     </a>
                 </p>
@@ -39,7 +40,7 @@
             <div class="carousel-caption" role="option">
                 <p>
                     Check out our workout videos and best trainers
-                    <a class="btn btn-default" asp-area="Trainings" asp-controller="Workouts" asp-action="Index">
+                    <a class="btn btn-info" asp-area="Trainings" asp-controller="Workouts" asp-action="Index">
                         Learn More
                     </a>
                 </p>
@@ -50,7 +51,7 @@
             <div class="carousel-caption" role="option">
                 <p>
                     Calculate your daily calories
-                    <a class="btn btn-default" asp-area="Calculator" asp-controller="Calculate" asp-action="Index">
+                    <a class="btn btn-info" asp-area="Calculator" asp-controller="Calculate" asp-action="Index">
                         Learn more
                     </a>
                 </p>
@@ -70,16 +71,35 @@
 <div class="row">
     <div class="col-md-6">
         <h2>Last Workouts Added</h2>
+        @foreach (var workout in Model.Workouts)
+        {
+            <div class="container col-md-10">
+                <div class="row col-md-12">
+                    <h3>@workout.Name</h3>
+                    <iframe width="360" height="250" src="https://www.youtube.com/embed/@workout.VideoId" frameborder="0" allowfullscreen></iframe>
+                    <div class="col-md-12 pull-right">
+                        @workout.Description
+                    </div>
+                </div>
+            </div>
+        }
     </div>
     <div class="col-md-6">
         <h2>Last In Forum</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398600">Add a Controller and View</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699318">Add client packages using Bower.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
-        </ul>
+        @foreach (var question in Model.Questions)
+        {
+            <div class="col-md-10">
+                <div class="row col-md-12">
+                    <div>
+                        <h3><a asp-controller="Answers" asp-action="Index" asp-route-id="@question.Id">@question.Title</a></h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>@question.Author @question.Published</p>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </div>

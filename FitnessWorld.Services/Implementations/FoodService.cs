@@ -23,8 +23,8 @@ namespace FitnessWorld.Services.Implementations
 
         public async Task<IEnumerable<FoodServiceModel>> AllAsync(int page = 1)
         => await this.db.Food
-            .Skip((page - 1) * ServiceConstants.PageSize)
-            .Take(ServiceConstants.PageSize)
+            .Skip((page - 1) * ServiceConstants.FoodPageSize)
+            .Take(ServiceConstants.FoodPageSize)
             .ProjectTo<FoodServiceModel>()
             .ToListAsync();
 

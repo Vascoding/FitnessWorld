@@ -11,7 +11,7 @@ namespace FitnessWorld.Web.Models.ListingViewModels.FoodModels
 
         public int TotalFoodCount { get; set; }
 
-        public int TotalPages => (int)Math.Ceiling((double)this.TotalFoodCount / ServiceConstants.PageSize);
+        public int TotalPages => (int)Math.Ceiling((double)this.TotalFoodCount / ServiceConstants.FoodPageSize);
 
         public int CurrentPage { get; set; }
 

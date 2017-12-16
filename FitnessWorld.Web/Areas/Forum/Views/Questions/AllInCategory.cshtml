@@ -1,13 +1,13 @@
-﻿@model ListQuestionsServiceModel
+﻿@model ListQuestionsInCategoryViewModel
 @{
     ViewData["Title"] = "All In Category";
 }
 
 <h2>@ViewData["Title"]</h2>
 
-<a class="btn btn-default" asp-controller="Questions" asp-action="Ask" asp-route-id="@Model.CategoryId">Ask Question</a>
+<a class="btn btn-primary" asp-controller="Questions" asp-action="Ask" asp-route-id="@Model.Questions.CategoryId">Ask Question</a>
 
-@foreach (var question in Model.Questions)
+@foreach (var question in Model.Questions.Questions)
 {
     <div class="row">
         <div class="col-md-6 pull-right">
@@ -21,7 +21,7 @@
     </div>
     <div class="row">
         <div class="col-md-6 pull-right">
-            <p>@question.Author @question.Published.ToShortDateString()</p>
+            <p>@question.Author @question.Published</p>
         </div>
     </div>
 }
@@ -30,3 +30,21 @@
         <a class="btn btn-default" asp-controller="Home" asp-action="Index">Back</a>
     </div>
 </div>
+
+@if (Model.TotalQuestionsCount > Model.Questions.Questions.Count())
+{
+    <ul class="pagination">
+        <li class="@(Model.CurrentPage == 1 ? "disabled" : string.Empty)">
+            <a asp-route-page="@Model.PreviousPage"
+               aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="@(Model.CurrentPage == Model.TotalPages ? "disabled" : string.Empty)">
+            <a asp-route-page="@Model.NextPage"
+               aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+}

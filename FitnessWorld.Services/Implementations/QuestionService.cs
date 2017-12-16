@@ -41,13 +41,15 @@ namespace FitnessWorld.Services.Implementations
             }
         }
 
-        public async Task<ListQuestionsServiceModel> AllInCategoryAsync(int id)
+        public async Task<ListQuestionsServiceModel> AllInCategoryAsync(int id, int page = 1)
             => new ListQuestionsServiceModel
             {
                 CategoryId = id,
                 Questions = await this.db
                 .Questions
                 .Where(q => q.CategoryId == id)
+                .Skip((page - 1) * ServiceConstants.QuestionsPageSize)
+                .Take(ServiceConstants.QuestionsPageSize)
                 .OrderByDescending(q => q.Published)
                 .ProjectTo<QuestionServiceModel>()
                 .ToListAsync()
@@ -97,11 +99,22 @@ namespace FitnessWorld.Services.Implementations
         public async Task<IEnumerable<QuestionServiceModel>> AllAsync(int page = 1)
            => await this.db
            .Questions
-           .Skip((page - 1) * ServiceConstants.PageSize)
-           .Take(ServiceConstants.PageSize)
+           .OrderByDescending(q => q.Published)
+           .Skip((page - 1) * ServiceConstants.QuestionsPageSize)
+           .Take(ServiceConstants.QuestionsPageSize)
            .ProjectTo<QuestionServiceModel>()
            .ToListAsync();
 
+        public async Task<IEnumerable<QuestionServiceModel>> LastAddedAsync()
+            => await this.db
+            .Questions
+            .OrderByDescending(q => q.Id)
+            .Take(ServiceConstants.LastAddedQuestions)
+            .ProjectTo<QuestionServiceModel>()
+            .ToListAsync();
+
         public async Task<int> TotalAsync() => await this.db.Questions.CountAsync();
+
+        public async Task<int> TotalInCategoryAsync(int id) => await this.db.Questions.CountAsync(q => q.CategoryId == id);
     }
 }

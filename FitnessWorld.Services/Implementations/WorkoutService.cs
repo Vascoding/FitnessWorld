@@ -24,8 +24,8 @@ namespace FitnessWorld.Services.Implementations
         public async Task<IEnumerable<WorkoutServiceModel>> AllAsync(int page = 1)
             => await this.db
              .Workouts
-             .Skip((page - 1) * ServiceConstants.PageSize)
-             .Take(ServiceConstants.PageSize)
+             .Skip((page - 1) * ServiceConstants.WorkoutPageSize)
+             .Take(ServiceConstants.WorkoutPageSize)
              .ProjectTo<WorkoutServiceModel>()
              .ToListAsync();
 
@@ -82,6 +82,14 @@ namespace FitnessWorld.Services.Implementations
                 await this.db.SaveChangesAsync();
             }
         }
+
+        public async Task<IEnumerable<WorkoutServiceModel>> LastAddedAsync()
+            => await this.db
+            .Workouts
+            .OrderByDescending(w => w.Id)
+            .Take(ServiceConstants.LastAddedWorkouts)
+            .ProjectTo<WorkoutServiceModel>()
+            .ToListAsync();
 
         public async Task<int> TotalAsync() => await this.db.Workouts.CountAsync();
     }

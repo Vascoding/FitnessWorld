@@ -11,7 +11,7 @@ namespace FitnessWorld.Web.Models.ListingViewModels.WorkoutModels
 
         public int TotalWorkoutCount { get; set; }
 
-        public int TotalPages => (int)Math.Ceiling((double)this.TotalWorkoutCount / ServiceConstants.PageSize);
+        public int TotalPages => (int)Math.Ceiling((double)this.TotalWorkoutCount / ServiceConstants.WorkoutPageSize);
 
         public int CurrentPage { get; set; }
 
