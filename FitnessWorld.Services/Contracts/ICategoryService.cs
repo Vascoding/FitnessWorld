@@ -15,6 +15,6 @@ namespace FitnessWorld.Services.Contracts
 
         Task Edit(int id, string name);
 
-        Task Delete(int id);
+        Task<bool> DeleteAsync(int id);
     }
 }

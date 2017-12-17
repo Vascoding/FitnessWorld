@@ -1,7 +1,9 @@
 ﻿using FitnessWorld.Services.Contracts;
 using FitnessWorld.Web.Models.ListingViewModels.ForumModels;
+using FitnessWorld.Web.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using FitnessWorld.Web.Infrastructure.Constants;
 
 namespace FitnessWorld.Web.Areas.Forum.Controllers
 {
@@ -28,6 +30,8 @@ namespace FitnessWorld.Web.Areas.Forum.Controllers
                     CurrentPage = page
                 });
             }
+
+            this.ViewData.AddSearchMessage(string.Format(WebConstants.ViewDataSearchResultMessage, searchText));
 
             return this.View(new ListQuestionsViewModel
             {

@@ -1,0 +1,25 @@
+﻿
+@if (TempData[WebConstants.TempDataSuccessMessageKey] != null)
+{
+    <div class="alert alert-dismissible alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>@TempData[WebConstants.TempDataSuccessMessageKey]</strong>
+    </div>
+}
+
+@if (TempData[WebConstants.TempDataErrorMessageKey] != null)
+{
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>@ViewData[WebConstants.TempDataErrorMessageKey]</strong>
+    </div>
+}
+
+@if (ViewData[WebConstants.ViewDataSearchMessageKey] != null)
+{
+    <div class="alert alert-dismissible alert-info">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>@ViewData[WebConstants.ViewDataSearchMessageKey]</strong>
+    </div>
+}
+

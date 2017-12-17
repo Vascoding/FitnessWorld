@@ -16,3 +16,4 @@ namespace FitnessWorld.Web
                 .Build();
     }
 }
+

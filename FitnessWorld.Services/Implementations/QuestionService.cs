@@ -50,7 +50,7 @@ namespace FitnessWorld.Services.Implementations
                 .Where(q => q.CategoryId == id)
                 .Skip((page - 1) * ServiceConstants.QuestionsPageSize)
                 .Take(ServiceConstants.QuestionsPageSize)
-                .OrderByDescending(q => q.Published)
+                .OrderByDescending(q => q.Id)
                 .ProjectTo<QuestionServiceModel>()
                 .ToListAsync()
             };
@@ -99,7 +99,7 @@ namespace FitnessWorld.Services.Implementations
         public async Task<IEnumerable<QuestionServiceModel>> AllAsync(int page = 1)
            => await this.db
            .Questions
-           .OrderByDescending(q => q.Published)
+           .OrderByDescending(q => q.Id)
            .Skip((page - 1) * ServiceConstants.QuestionsPageSize)
            .Take(ServiceConstants.QuestionsPageSize)
            .ProjectTo<QuestionServiceModel>()

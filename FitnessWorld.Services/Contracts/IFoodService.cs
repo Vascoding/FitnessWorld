@@ -17,7 +17,7 @@ namespace FitnessWorld.Services.Contracts
 
         Task EditAsync(int id, string name, int calories, int fat, int proteins, int carbs, int fiber, int sugar);
 
-        Task DeleteAsync(int id);
+        Task<bool> DeleteAsync(int id);
 
         Task<int> TotalAsync();
     }

@@ -77,7 +77,7 @@ namespace FitnessWorld.Services.Implementations
             }
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var food = await this.db.Food.FirstOrDefaultAsync(f => f.Id == id);
 
@@ -86,7 +86,10 @@ namespace FitnessWorld.Services.Implementations
                 this.db.Food.Remove(food);
 
                 await this.db.SaveChangesAsync();
+                return true;
             }
+
+            return false;
         }
 
         public async Task<int> TotalAsync() => await this.db.Food.CountAsync();

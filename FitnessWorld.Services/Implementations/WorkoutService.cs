@@ -71,7 +71,7 @@ namespace FitnessWorld.Services.Implementations
             }
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var workout = await this.db.Workouts.FirstOrDefaultAsync(w => w.Id == id);
 
@@ -80,7 +80,10 @@ namespace FitnessWorld.Services.Implementations
                 this.db.Workouts.Remove(workout);
 
                 await this.db.SaveChangesAsync();
+                return true;
             }
+
+            return false;
         }
 
         public async Task<IEnumerable<WorkoutServiceModel>> LastAddedAsync()

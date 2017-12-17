@@ -35,7 +35,6 @@ namespace FitnessWorld.Web.Models.ListingViewModels.CalculatorModels
                 : this.CurrentPage + 1;
 
         
-
         private CalculatorServiceModel Calculate()
         {
             return new CalculatorServiceModel

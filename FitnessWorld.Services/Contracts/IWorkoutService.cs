@@ -17,7 +17,7 @@ namespace FitnessWorld.Services.Contracts
 
         Task EditAsync(int id, string name, string description, string videoId);
 
-        Task DeleteAsync(int id);
+        Task<bool> DeleteAsync(int id);
 
         Task<int> TotalAsync();
 

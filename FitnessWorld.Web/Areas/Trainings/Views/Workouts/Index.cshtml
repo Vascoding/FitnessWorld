@@ -5,12 +5,14 @@
 
 <h2 class="text-center">@ViewData["Title"]</h2>
 
+@await Html.PartialAsync("_SuccessOrErrorPartial")
+
 <div class="row">
     <form asp-action="Index">
         <div class="col-md-6">
             <input name="searchText" placeholder="Search for workout..." />
-            <input type="submit" value="Search" class="btn btn-default" />
-            <a class="btn btn-default" asp-area="Trainings" asp-controller="Workouts" asp-action="Index">All Workouts</a>
+            <input type="submit" value="Search" class="btn btn-primary" />
+            <a class="btn btn-info" asp-area="Trainings" asp-controller="Workouts" asp-action="Index">All Workouts</a>
         </div>
     </form>
 </div>

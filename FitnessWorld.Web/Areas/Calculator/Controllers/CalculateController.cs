@@ -1,5 +1,7 @@
 ﻿using FitnessWorld.Data.Models;
 using FitnessWorld.Services.Contracts;
+using FitnessWorld.Web.Infrastructure.Constants;
+using FitnessWorld.Web.Infrastructure.Extensions;
 using FitnessWorld.Web.Models.ListingViewModels.CalculatorModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +35,8 @@ namespace FitnessWorld.Web.Areas.Calculator.Controllers
                     CurrentPage = page
                 });
             }
+
+            this.ViewData.AddSearchMessage(string.Format(WebConstants.ViewDataSearchResultMessage, searchText));
 
             return this.View(new ListCalculateViewModel
             {

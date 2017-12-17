@@ -1,9 +1,11 @@
 ﻿@model IEnumerable<CategoryServiceModel>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "All categories";
 }
 
-<h2>Index</h2>
+<h2>@ViewData["Title"]</h2>
+
+@await Html.PartialAsync("_SuccessOrErrorPartial")
 
 <div class="row">
     <div class="col-md-6">

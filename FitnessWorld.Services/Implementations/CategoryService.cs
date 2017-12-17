@@ -48,7 +48,7 @@ namespace FitnessWorld.Services.Implementations
             await this.db.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var category = await this.db.Categories.FirstOrDefaultAsync(c => c.Id == id);
 
@@ -56,7 +56,11 @@ namespace FitnessWorld.Services.Implementations
             {
                 this.db.Categories.Remove(category);
                 await this.db.SaveChangesAsync();
+
+                return true;
             }
+
+            return false;
         }
     }
 }

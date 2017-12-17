@@ -1,5 +1,7 @@
 ﻿using FitnessWorld.Data.ViewModels.CategoryModels;
 using FitnessWorld.Services.Contracts;
+using FitnessWorld.Web.Infrastructure.Constants;
+using FitnessWorld.Web.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -7,6 +9,11 @@ namespace FitnessWorld.Web.Areas.Admin.Controllers
 {
     public class CategoriesController : BaseController
     {
+        private const string CreateCategorySuccessMessage = "You added category successfully!";
+        private const string NotValidCategoryErrorMessage = "Category name is required and must be between 3 and 30 symbols";
+        private const string EditCategorySuccessMessage = "You edited category successfully!";
+        private const string DeleteCategorySuccessMessage = "You deleted category successfully!";
+
         private readonly ICategoryService categories;
 
         public CategoriesController(ICategoryService categories)
@@ -25,11 +32,12 @@ namespace FitnessWorld.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
+                TempData.AddErrorMessage(NotValidCategoryErrorMessage);
                 return this.RedirectToAction(nameof(Create));
             }
-
+            TempData.AddSuccessMessage(CreateCategorySuccessMessage);
             await this.categories.Create(model.Name);
-
+           
             return this.RedirectToAction(nameof(Index));
         }
 
@@ -41,11 +49,12 @@ namespace FitnessWorld.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
+                TempData.AddErrorMessage(NotValidCategoryErrorMessage);
                 return this.RedirectToAction(nameof(Index));
             }
 
             await this.categories.Edit(model.Id, model.Name);
-
+            TempData.AddSuccessMessage(EditCategorySuccessMessage);
             return this.RedirectToAction(nameof(Index));
         }
 
@@ -55,8 +64,14 @@ namespace FitnessWorld.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Confirm(int id)
         {
-            await this.categories.Delete(id);
+            var success = await this.categories.DeleteAsync(id);
+            if (success)
+            {
+                TempData.AddSuccessMessage(DeleteCategorySuccessMessage);
+                return this.RedirectToAction(nameof(Index));
+            }
 
+            TempData.AddErrorMessage(WebConstants.NotFound);
             return this.RedirectToAction(nameof(Index));
         }
     }

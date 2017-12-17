@@ -27,7 +27,7 @@ namespace FitnessWorld.Web
             services.AddDbContext<FitnessWorldDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<User, IdentityRole>(option => 
+            services.AddIdentity<User, IdentityRole>(option =>
             {
                 option.Password.RequireDigit = false;
                 option.Password.RequiredLength = 2;
@@ -46,12 +46,12 @@ namespace FitnessWorld.Web
 
             // Add application services.
             services.AddDomainServices();
-			
-            services.AddAutoMapper();
-			
-			services.AddRouting(routing => routing.LowercaseUrls = true);
 
-            services.AddMvc(option =>  
+            services.AddAutoMapper();
+
+            services.AddRouting(routing => routing.LowercaseUrls = true);
+
+            services.AddMvc(option =>
             {
                 option.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
@@ -82,7 +82,7 @@ namespace FitnessWorld.Web
                 routes.MapRoute(
                     name: "areas",
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-                
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
@@ -90,3 +90,4 @@ namespace FitnessWorld.Web
         }
     }
 }
+

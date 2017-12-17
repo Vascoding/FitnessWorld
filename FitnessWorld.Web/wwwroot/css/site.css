@@ -17,9 +17,7 @@
 }
 
 /* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
-}
+
 
 .carousel-inner.item active {
     width: 1000px;

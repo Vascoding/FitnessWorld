@@ -1,4 +1,6 @@
 ﻿using FitnessWorld.Services.Contracts;
+using FitnessWorld.Web.Infrastructure.Constants;
+using FitnessWorld.Web.Infrastructure.Extensions;
 using FitnessWorld.Web.Models.ListingViewModels.WorkoutModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -25,6 +27,8 @@ namespace FitnessWorld.Web.Areas.Trainings.Controllers
                     TotalWorkoutCount = await this.workouts.TotalAsync()
                 });
             }
+
+            this.ViewData.AddSearchMessage(string.Format(WebConstants.ViewDataSearchResultMessage, searchText));
 
             return this.View(new ListWorkoutModel
             {
