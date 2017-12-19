@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace FitnessWorld.Data.Migrations
 {
-    public partial class InitialDatabase : Migration
+    public partial class InitialCreateDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -351,6 +351,13 @@ namespace FitnessWorld.Data.Migrations
                 name: "IX_AspNetUserRoles_RoleId",
                 table: "AspNetUserRoles",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_Email",
+                table: "AspNetUsers",
+                column: "Email",
+                unique: true,
+                filter: "[Email] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",

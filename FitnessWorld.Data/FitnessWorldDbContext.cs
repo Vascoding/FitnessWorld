@@ -41,6 +41,10 @@ namespace FitnessWorld.Data
                 .HasForeignKey(uf => uf.FoodId);
 
             builder.Entity<User>()
+                .HasIndex(u => u.Email)
+                .IsUnique(true);
+
+            builder.Entity<User>()
                 .HasMany(u => u.Answers)
                 .WithOne(a => a.User)
                 .HasForeignKey(a => a.UserId);

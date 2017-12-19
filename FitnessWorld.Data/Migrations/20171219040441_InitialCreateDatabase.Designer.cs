@@ -11,8 +11,8 @@ using System;
 namespace FitnessWorld.Data.Migrations
 {
     [DbContext(typeof(FitnessWorldDbContext))]
-    [Migration("20171215084310_InitialDatabase")]
-    partial class InitialDatabase
+    [Migration("20171219040441_InitialCreateDatabase")]
+    partial class InitialCreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -185,6 +185,10 @@ namespace FitnessWorld.Data.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");

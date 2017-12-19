@@ -23,5 +23,7 @@
 
         public const int VieoIdMinLength = 11;
         public const int VieoIdMaxLength = 11;
+
+        public const int UserFoodMinQuantity = 1;
     }
 }

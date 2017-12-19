@@ -63,3 +63,7 @@ div .best.col-md-2 {
     background-color: burlywood;
     text-align: center;
 }
+
+li .dropdown.category {
+    font-size: large
+}

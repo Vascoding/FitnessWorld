@@ -8,12 +8,16 @@
   <ItemGroup>
     <Compile Remove="Areas\Admin\Models\**" />
     <Compile Remove="Areas\Calculator\Models\**" />
+    <Compile Remove="wwwroot\images\**" />
     <Content Remove="Areas\Admin\Models\**" />
     <Content Remove="Areas\Calculator\Models\**" />
+    <Content Remove="wwwroot\images\**" />
     <EmbeddedResource Remove="Areas\Admin\Models\**" />
     <EmbeddedResource Remove="Areas\Calculator\Models\**" />
+    <EmbeddedResource Remove="wwwroot\images\**" />
     <None Remove="Areas\Admin\Models\**" />
     <None Remove="Areas\Calculator\Models\**" />
+    <None Remove="wwwroot\images\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,10 +46,6 @@
   <ItemGroup>
     <ProjectReference Include="..\FitnessWorld.Data\FitnessWorld.Data.csproj" />
     <ProjectReference Include="..\FitnessWorld.Services\FitnessWorld.Services.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

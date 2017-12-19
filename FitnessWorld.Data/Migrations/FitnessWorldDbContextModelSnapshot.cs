@@ -185,6 +185,10 @@ namespace FitnessWorld.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
+
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 

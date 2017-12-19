@@ -21,7 +21,6 @@ namespace FitnessWorld.Web
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<FitnessWorldDbContext>(options =>
@@ -44,7 +43,6 @@ namespace FitnessWorld.Web
                 fo.AppSecret = "9fec7f3a978b601e0ee5eb9bf5a53b2a";
             });
 
-            // Add application services.
             services.AddDomainServices();
 
             services.AddAutoMapper();
@@ -57,7 +55,6 @@ namespace FitnessWorld.Web
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseDatabaseMigration();

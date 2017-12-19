@@ -120,8 +120,8 @@
     <head>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
+            google.charts.load("current", { packages: ["corechart"] });
+            google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Task', 'Calories Per Day'],
@@ -131,8 +131,8 @@
           ['Carbs', @Model.Total.Carbs],
           ['Fiber',    @Model.Total.Fiber],
           ['Sugar',    @Model.Total.Sugar]
-        ]);
-
+          ]);
+         
         var options = {
           title: 'My Daily Food Consumption',
           is3D: true,
