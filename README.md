@@ -7,7 +7,7 @@
 * Register users - Name, Email, Password
 * Login/Logout users - Email, Password
 * Calorie Calculator - Users can calculate their meals calories
-* Forum - Users can ask quesions in different category, and give best answer.Users can answer question and recieve 1 point (Best answer - 10).Users can comment answer.
+* Forum - Users can ask quesions in different category, and give best answer. Users can answer question and recieve 1 point (Best answer - 10). Users can comment answer.
 * Workouts - Users can watch workout videos
 
 ### Usage
