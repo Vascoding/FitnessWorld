@@ -2,7 +2,7 @@
 
 ## This is a simple web application for bodybuilders and people, who choose to live healthy life.
 
-### Application:
+### Application
 
 * Register users - Name, Email, Password
 * Login/Logout users - Email, Password
@@ -26,7 +26,7 @@
 
 ##### Logged in users:
 
-* Calculate characteristics for different kind of food (eg. one meal calories)
+* Calculate characteristics for different kind of food (e.g. one meal calories)
 * Ask questions (Forum)
 * Answer questions (Forum)
 * Comment answer (Forum)
