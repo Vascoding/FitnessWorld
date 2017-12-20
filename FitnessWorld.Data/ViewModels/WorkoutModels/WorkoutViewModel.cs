@@ -13,8 +13,8 @@ namespace FitnessWorld.Data.ViewModels.WorkoutModels
         public string Name { get; set; }
 
         [Required]
-        [MinLength(NutritionDescriptionMinLength)]
-        [MaxLength(NutritionDescriptionMaxLength)]
+        [MinLength(WorkoutDescriptionMinLength)]
+        [MaxLength(WorkoutDescriptionMaxLength)]
         public string Description { get; set; }
 
         [Required]

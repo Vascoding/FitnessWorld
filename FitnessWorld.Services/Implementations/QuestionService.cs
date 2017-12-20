@@ -48,9 +48,9 @@ namespace FitnessWorld.Services.Implementations
                 Questions = await this.db
                 .Questions
                 .Where(q => q.CategoryId == id)
+                .OrderByDescending(q => q.Id)
                 .Skip((page - 1) * ServiceConstants.QuestionsPageSize)
                 .Take(ServiceConstants.QuestionsPageSize)
-                .OrderByDescending(q => q.Id)
                 .ProjectTo<QuestionServiceModel>()
                 .ToListAsync()
             };
