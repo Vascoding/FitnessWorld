@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-
 namespace FitnessWorld.Data.ViewModels.FoodModels
 {
     public class FoodCrudModel

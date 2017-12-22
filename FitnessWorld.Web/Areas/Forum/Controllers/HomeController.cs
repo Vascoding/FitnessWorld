@@ -36,7 +36,7 @@ namespace FitnessWorld.Web.Areas.Forum.Controllers
             return this.View(new ListQuestionsViewModel
             {
                 Categories = await this.categories.AllAsync(),
-                Questions = await this.questions.ResultAsync(searchText)
+                Questions = this.questions.ResultAsync(searchText)
             });
         }
     }

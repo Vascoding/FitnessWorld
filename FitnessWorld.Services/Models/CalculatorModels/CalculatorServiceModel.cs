@@ -1,7 +1,5 @@
-﻿using AutoMapper;
-using FitnessWorld.Common.Mapping.Contracts;
+﻿using FitnessWorld.Common.Mapping.Contracts;
 using FitnessWorld.Data.Models;
-using System.Linq;
 
 namespace FitnessWorld.Services.Models.CalculatorModels
 {
