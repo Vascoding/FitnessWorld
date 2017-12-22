@@ -88,14 +88,14 @@ namespace FitnessWorld.Services.Implementations
             }
         }
 
-        public  IEnumerable<QuestionServiceModel> ResultAsync(string searchText)
-            =>  this.db
+        public async Task<IEnumerable<QuestionServiceModel>> ResultAsync(string searchText)
+            => await this.db
             .Questions
             .Where(q => q.Title.ToLower().Contains(searchText.ToLower())
             || q.Content.ToLower().Contains(searchText.ToLower()))
             .OrderByDescending(q => q.Id)
             .ProjectTo<QuestionServiceModel>()
-            .ToList();
+            .ToListAsync();
 
         public async Task<IEnumerable<QuestionServiceModel>> AllAsync(int page = 1)
            => await this.db

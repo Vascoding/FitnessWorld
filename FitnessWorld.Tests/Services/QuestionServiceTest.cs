@@ -31,9 +31,9 @@ namespace FitnessWorld.Tests.Services
 
             var db = this.dbSetup.InitializeTestDb();
 
-            var firstQuestion = new Question { Id = 1, Title = "First", Content = "maic" };
-            var secondQuestion = new Question { Id = 2, Title = "Second", Content = "maic" };
-            var thirdQuestion = new Question { Id = 3, Title = "Third", Content = "maic" };
+            var firstQuestion = new Question { Id = 1, Title = "First", Content = "first" };
+            var secondQuestion = new Question { Id = 2, Title = "Second", Content = "second" };
+            var thirdQuestion = new Question { Id = 3, Title = "Third", Content = "third" };
 
             db.Questions.AddRange(firstQuestion, secondQuestion, thirdQuestion);
 
@@ -42,7 +42,7 @@ namespace FitnessWorld.Tests.Services
             var questionService = new QuestionService(db);
             // Act
 
-            var result = questionService.ResultAsync("t");
+            var result = await questionService.ResultAsync("i");
             // Assert
 
             result
