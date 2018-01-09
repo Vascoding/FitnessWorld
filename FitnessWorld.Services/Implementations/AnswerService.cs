@@ -46,7 +46,7 @@ namespace FitnessWorld.Services.Implementations
             var questionid = id;
             var categoryId = this.db.Questions.FirstOrDefault(q => q.Id == id).CategoryId;
             var questions = await this.db.Questions.Where(q => q.Id == id).ProjectTo<QuestionServiceModel>().FirstOrDefaultAsync();
-            var answers = await this.db.Answers.Where(q => q.QuestionId == id).ProjectTo<AnswerServiceModel>().ToListAsync();
+            var answers = await this.db.Answers.Where(q => q.QuestionId == id).OrderBy(b => !b.IsBestAnswer).ProjectTo<AnswerServiceModel>().ToListAsync();
 
             foreach (var answer in answers)
             {
