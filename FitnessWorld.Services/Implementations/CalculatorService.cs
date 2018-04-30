@@ -27,7 +27,7 @@ namespace FitnessWorld.Services.Implementations
                 quantity = 1;
             }
             var userFood = await this.db.UserFood.FirstOrDefaultAsync(uf => uf.UserId == userId && uf.FoodId == foodId);
-            
+
             if (userFood == null)
             {
                 var food = await this.db.Food.FirstOrDefaultAsync(f => f.Id == foodId);
@@ -69,26 +69,16 @@ namespace FitnessWorld.Services.Implementations
             var foodToCalc = await this.db
             .Food
             .Where(f => f.Users.Any(u => u.UserId == userId))
-            .ProjectTo<CalculatorServiceModel>()
+            .ProjectTo<CalculatorServiceModel>(new { userId = userId })
             .ToListAsync();
 
-            foreach (var food in foodToCalc)
-            {
-                food.Quantity = db.UserFood.FirstOrDefault(uf => uf.UserId == userId && uf.FoodId == food.Id).Quantity;
-                food.Calories *= food.Quantity;
-                food.Protein *= food.Quantity;
-                food.Fat *= food.Quantity;
-                food.Fiber *= food.Quantity;
-                food.Carbs *= food.Quantity;
-                food.ServingSize *= food.Quantity;
-                food.Sugar *= food.Quantity;
-            }
+            foodToCalc.ForEach(f => f.Calc());
 
             return foodToCalc;
         }
 
 
-        public async Task<FoodServiceModel> Find(int id) 
+        public async Task<FoodServiceModel> Find(int id)
             => await this.db
             .Food
             .ProjectTo<FoodServiceModel>()

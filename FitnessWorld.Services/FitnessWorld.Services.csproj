@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\CalculatorModels\Calculate.cs" />
     <Compile Remove="Models\FoodModels\AddFoodServiceModel.cs" />
   </ItemGroup>
 
